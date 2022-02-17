@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import axios from 'axios';
 
@@ -8,13 +8,13 @@ import useUser from '../../lib/useUser';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Team() {
+  const router = useRouter();
   const { user, mutateUser } = useUser();
 
   const defaultFormFields = {
     name: '',
     blurb: '',
     hero_image: '',
-    // admin: '',
     custom_prompt: '',
     collab_prompt: '',
   };

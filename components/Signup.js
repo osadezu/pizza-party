@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Signup() {
+  const router = useRouter();
   const defaultFormFields = {
     // first_name: '',
     email: '',

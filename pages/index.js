@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import Signup from '../components/Signup.js';
 
-export default function Home({ loggedIn, handleLogin }) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -28,7 +28,7 @@ export default function Home({ loggedIn, handleLogin }) {
           In seconds!
         </div>
         <div className='flex flex-col justify-center items-center gap-4'>
-          <Signup loggedIn={loggedIn} handleLogin={handleLogin} />
+          <Signup />
         </div>
       </div>
     </>
