@@ -73,7 +73,7 @@ export default function MemberEdit() {
     try {
       const res = await axios({
         method: isNewMember ? 'post' : 'put',
-        url: isNewMember ? 'members/' : `members/${user.isAdmin}`,
+        url: isNewMember ? 'members/' : `members/${user.isMember}`,
         data: data,
         headers: {
           'content-type': 'multipart/form-data',

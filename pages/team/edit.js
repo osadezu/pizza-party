@@ -74,7 +74,7 @@ export default function TeamEdit() {
       // console.log(res);
       if (res.status === 201) {
         // Created
-        router.push('/member?newMember=true');
+        router.push('/member/edit');
       } else if (res.status === 200) {
         // Updated
         router.push('/team');
