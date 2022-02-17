@@ -35,7 +35,7 @@ export default function Signup() {
         const data = await response.json();
         if (response.ok) {
           console.log('Logged in, redirecting.', data);
-          router.push('/team');
+          router.push('/team/edit?newTeam=true');
         }
       }
     } catch (error) {

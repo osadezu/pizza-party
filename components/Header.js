@@ -6,6 +6,8 @@ export default function Header() {
   const router = useRouter();
   const { user, mutateUser } = useUser();
 
+  console.log(user);
+
   return (
     <div id='header-wrapper'>
       <div className='flex items-end'>
