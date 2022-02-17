@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 
 import Signup from '../components/Signup.js';
+import Login from '../components/Login.js';
 
 export default function Home() {
+  const [doLogin, setDoLogin] = useState(false);
+
   return (
     <>
       <Head>
@@ -28,7 +32,36 @@ export default function Home() {
           In seconds!
         </div>
         <div className='flex flex-col justify-center items-center gap-4'>
-          <Signup />
+          <div className='flex flex-col items-end'>
+            {doLogin ? (
+              <>
+                <p>Welcome back!</p>
+                <p>
+                  New user?
+                  <button
+                    type='button'
+                    className='mx-1'
+                    onClick={() => setDoLogin(!doLogin)}>
+                    Sign Up
+                  </button>
+                </p>
+              </>
+            ) : (
+              <>
+                <p>Sign up to build your team!</p>
+                <p>
+                  Existing user?
+                  <button
+                    type='button'
+                    className='mx-1'
+                    onClick={() => setDoLogin(!doLogin)}>
+                    Log In
+                  </button>
+                </p>
+              </>
+            )}
+          </div>
+          {doLogin ? <Login /> : <Signup />}
         </div>
       </div>
     </>

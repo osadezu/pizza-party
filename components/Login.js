@@ -9,18 +9,14 @@ export default function Signup() {
   const defaultFormFields = {
     email: '',
     password: '',
-    re_password: '',
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const [passwordMatch, setPasswordMatch] = useState(false);
+  const [formFilled, setFormFilled] = useState(false);
 
   function handleChange(e) {
     const newFormFields = { ...formFields, [e.target.id]: e.target.value };
     setFormFields(newFormFields);
-
-    if (e.target.id === 'password' || e.target.id === 're_password') {
-      setPasswordMatch(newFormFields.password === newFormFields.re_password);
-    }
+    setFormFilled(newFormFields.email.length && newFormFields.password.length);
   }
 
   async function handleLogin(body) {
@@ -38,9 +34,9 @@ export default function Signup() {
           router.push('/team');
         }
       }
-    } catch (error) {
+    } catch (err) {
       // TODO: Handle error
-      console.error(error);
+      console.error(err);
     }
   }
 
@@ -62,33 +58,15 @@ export default function Signup() {
           auth_token: res.data.auth_token,
         });
       }
-    } catch (error) {
+    } catch (err) {
       // TODO: Handle error
-      console.error(error.response.data);
+      console.error(err.response.data);
     }
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    try {
-      const res = await axios({
-        method: 'post',
-        url: 'users/',
-        data: {
-          email: formFields.email,
-          password: formFields.password,
-          re_password: formFields.re_password,
-        },
-      });
-      console.log(res);
-      if (res.status === 201) {
-        getToken();
-      }
-    } catch (error) {
-      // TODO: Handle error
-      console.error(error.response.data);
-    }
+    getToken();
   }
 
   return (
@@ -112,16 +90,7 @@ export default function Signup() {
         minLength='8'
         required
       />
-      <label htmlFor='re_password'>confirm password:</label>
-      <input
-        type='password'
-        id='re_password'
-        value={formFields.re_password}
-        onChange={handleChange}
-        minLength='8'
-        required
-      />
-      <button type='submit' className='col-span-2' disabled={!passwordMatch}>
+      <button type='submit' className='col-span-2' disabled={!formFilled}>
         Go Team!
       </button>
     </form>

@@ -54,7 +54,7 @@ export default withSessionRoute(async (req, res) => {
         }
       }
     } catch (error) {
-      console.error(error);
+      console.error(error.response.data);
     }
 
     // Save data in session
