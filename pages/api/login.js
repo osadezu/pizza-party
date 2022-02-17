@@ -4,8 +4,9 @@ import { withSessionRoute } from '../../lib/withSession';
 // https://github.com/vvo/iron-session
 
 export default withSessionRoute(async (req, res) => {
-  // This endpoint saves the req body in a session cookie and adds isLoggedIn value.
-  req.session.user = { ...req.body, isLoggedIn: true };
+  // This endpoint saves the req body in a session cookie
+  console.log(req.session);
+  req.session.user = { ...req.body };
   await req.session.save();
   res.status(200).json({ message: 'Logged in.' });
 });

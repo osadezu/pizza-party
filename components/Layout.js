@@ -3,9 +3,9 @@ import Header from './Header';
 
 function Layout({ children }) {
   return (
-    <div className='w-screen h-screen relative'>
+    <div id='app-wrapper'>
       <Header />
-      <main className='h-full'>{children}</main>
+      <main>{children}</main>
       <Navigation />
     </div>
   );

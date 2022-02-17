@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import axios from 'axios';
 import Router from 'next/router';
+import axios from 'axios';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Signup() {
   const defaultFormFields = {
-    first_name: '',
+    // first_name: '',
     email: '',
     password: '',
     re_password: '',
@@ -34,7 +34,8 @@ export default function Signup() {
         console.log('Response from /api/login', response);
         const data = await response.json();
         if (response.ok) {
-          return data;
+          console.log('Logged in, redirecting.', data);
+          Router.push('/team');
         }
       }
     } catch (err) {
@@ -60,7 +61,6 @@ export default function Signup() {
           email: formFields.email,
           auth_token: res.data.auth_token,
         });
-        // Router.push('/createTeam');
       }
     } catch (err) {
       // TODO: Handle error
@@ -94,19 +94,22 @@ export default function Signup() {
   return (
     <>
       <div className='flex'>
-        Sign up to start your team! Or <a href=''>Log In</a>
+        Sign up to start your team! Or{' '}
+        <a href='' className='mx-1'>
+          Log In
+        </a>
       </div>
       <form
         onSubmit={handleSubmit}
         className='grid grid-cols-2 gap-4 place-items-end'>
-        <label htmlFor='first_name'>first name:</label>
+        {/* <label htmlFor='first_name'>first name:</label>
         <input
           type='text'
           id='first_name'
           value={formFields.first_name}
           onChange={handleChange}
           required
-        />
+        /> */}
         <label htmlFor='email'>email:</label>
         <input
           type='email'

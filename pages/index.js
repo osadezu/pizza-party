@@ -9,7 +9,7 @@ export default function Home({ loggedIn, handleLogin }) {
       <Head>
         <title>PizzaParty</title>
       </Head>
-      <div className='h-full grid grid-cols-2 '>
+      <div className='h-full grid grid-cols-2'>
         <div className='flex flex-col items-center justify-center'>
           Go from this...
           <Image

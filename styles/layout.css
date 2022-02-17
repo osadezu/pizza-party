@@ -1,0 +1,21 @@
+#app-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#header-wrapper {
+  width: 100%;
+  position: fixed;
+  top: 0;
+
+  display: flex;
+  justify-content: space-between;
+  justify-items: flex-end;
+}
+
+.title main {
+}
