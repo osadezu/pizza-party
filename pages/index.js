@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 
@@ -6,7 +7,15 @@ import Signup from '../components/Signup.js';
 import Login from '../components/Login.js';
 
 export default function Home() {
+  const router = useRouter();
   const [doLogin, setDoLogin] = useState(false);
+
+  useEffect(() => {
+    if (router.isReady) {
+      setDoLogin('login' in router.query);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.isReady, router.query?.login]);
 
   return (
     <>

@@ -7,7 +7,10 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 // https://github.com/vvo/iron-session
 
 export default withSessionRoute(async (req, res) => {
-  if (req.session.user) {
+  // TODO: cleanup session data to save only the minimal information
+  // The rest of necessary User props can be passed in response without saving in session
+
+  if (req.session.user?.email && req.session.user?.auth_token) {
     // This endpoint returns the session.user object and sets isLoggedIn: true
     // Check if user owns a team
     try {
@@ -20,11 +23,15 @@ export default withSessionRoute(async (req, res) => {
       });
       // console.log(teamsResponse.data);
       if (teamsResponse.status === 200) {
-        const teams = teamsResponse.data.filter(
+        const team = teamsResponse.data.find(
           (team) => team.admin === req.session.user.email
         );
-        if (teams.length) {
-          req.session.user = { ...req.session.user, isAdmin: teams[0].id };
+        if (team) {
+          req.session.user = {
+            ...req.session.user,
+            isAdmin: team.id,
+            teamName: team.name,
+          };
         } else {
           req.session.user = { ...req.session.user, isAdmin: false };
         }
@@ -44,17 +51,22 @@ export default withSessionRoute(async (req, res) => {
       });
       // console.log(membersResponse.data);
       if (membersResponse.status === 200) {
-        const members = membersResponse.data.filter(
+        const member = membersResponse.data.find(
           (member) => member.user === req.session.user.email
         );
-        if (members.length) {
-          req.session.user = { ...req.session.user, isMember: members[0].id };
+        if (member) {
+          req.session.user = {
+            ...req.session.user,
+            isMember: member.id,
+            team: member.team,
+            avatar: member.avatar,
+          };
         } else {
           req.session.user = { ...req.session.user, isMember: false };
         }
       }
     } catch (error) {
-      console.error(error.response.data);
+      console.error(error);
     }
 
     // Save data in session

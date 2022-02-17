@@ -8,7 +8,12 @@ export default function Navigation() {
   const router = useRouter();
   const { user, mutateUser } = useUser();
 
-  console.log(router.pathname);
+  // console.log('Nav logging pathame:', router.pathname);
+
+  if (!user?.isLoggedIn) {
+    return <div className='absolute right-0 top-20'></div>;
+  }
+
   return (
     <div className='absolute right-0 top-20'>
       <ul>

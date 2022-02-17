@@ -2,10 +2,17 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+import useUser from '../lib/useUser';
+
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Signup() {
   const router = useRouter();
+  const { user, mutateUser } = useUser({
+    redirectTo: '/team',
+    redirectIfFound: true,
+  });
+
   const defaultFormFields = {
     email: '',
     password: '',
@@ -21,25 +28,22 @@ export default function Signup() {
 
   async function handleLogin(body) {
     try {
-      {
-        const response = await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        });
-        console.log('Response from /api/login', response);
-        const data = await response.json();
-        if (response.ok) {
-          console.log('Logged in, redirecting.', data);
-          router.push('/team');
-        }
-      }
+      mutateUser(
+        await (
+          await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          })
+        ).json()
+      );
     } catch (err) {
       // TODO: Handle error
       console.error(err);
     }
   }
 
+  // TODO: Should this call be moved to api/login?
   async function getToken() {
     try {
       const res = await axios({
@@ -50,9 +54,8 @@ export default function Signup() {
           password: formFields.password,
         },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
-        console.log(res.data);
         handleLogin({
           email: formFields.email,
           auth_token: res.data.auth_token,

@@ -4,9 +4,14 @@ import { withSessionRoute } from '../../lib/withSession';
 // https://github.com/vvo/iron-session
 
 export default withSessionRoute(async (req, res) => {
-  // This endpoint saves the req body in a session cookie
-  console.log(req.session);
-  req.session.user = { ...req.body };
+  // This endpoint saves the login req body (user email, auth token) in a session cookie
+
+  // TODO: Move actual api auth_token request here?
+
+  const user = { ...req.body, isLoggedIn: true };
+  req.session.user = user;
   await req.session.save();
-  res.status(200).json({ message: 'Logged in.' });
+  console.log('Saved session:', req.session);
+
+  res.json(user);
 });

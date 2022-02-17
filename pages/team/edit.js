@@ -9,7 +9,8 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function TeamEdit() {
   const router = useRouter();
-  const { user, mutateUser } = useUser();
+  const { user, mutateUser } = useUser({ redirectTo: '/?login' });
+
   const { newTeam } = router.query;
   const [isNewTeam, setIsNewTeam] = useState(newTeam === 'true');
 
@@ -23,6 +24,11 @@ export default function TeamEdit() {
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   useEffect(() => {
+    if (!user?.isLoggedIn) {
+      console.log('Not logged in.', user);
+      return; // Wait for session info
+    }
+
     if (user?.isAdmin) {
       setIsNewTeam(false);
       // Get user's team details
@@ -83,6 +89,10 @@ export default function TeamEdit() {
       // TODO: Handle error
       console.error(err.response.data);
     }
+  }
+
+  if (!user) {
+    return <p>Loading user session...</p>;
   }
 
   return (

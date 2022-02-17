@@ -1,7 +1,7 @@
 import Navigation from './Navigation';
 import Header from './Header';
 
-function Layout({ children }) {
+export default function Layout({ children }) {
   return (
     <div id='app-wrapper'>
       <Header />
@@ -10,5 +10,3 @@ function Layout({ children }) {
     </div>
   );
 }
-
-export default Layout;

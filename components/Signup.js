@@ -2,10 +2,18 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
+import useUser from '../lib/useUser';
+
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Signup() {
   const router = useRouter();
+
+  const { user, mutateUser } = useUser({
+    redirectTo: '/team/edit?newTeam',
+    redirectIfFound: true,
+  });
+
   const defaultFormFields = {
     email: '',
     password: '',
@@ -25,25 +33,20 @@ export default function Signup() {
 
   async function handleLogin(body) {
     try {
-      {
-        const response = await fetch('/api/login', {
+      mutateUser(
+        await fetch('/api/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(body),
-        });
-        console.log('Response from /api/login', response);
-        const data = await response.json();
-        if (response.ok) {
-          console.log('Logged in, redirecting.', data);
-          router.push('/team/edit?newTeam=true');
-        }
-      }
+        })
+      );
     } catch (error) {
       // TODO: Handle error
       console.error(error);
     }
   }
 
+  // TODO: Should this call be moved to api/login?
   async function getToken() {
     try {
       const res = await axios({
@@ -70,7 +73,6 @@ export default function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       const res = await axios({
         method: 'post',

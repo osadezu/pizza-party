@@ -5,7 +5,7 @@ import { withSessionRoute } from '../../lib/withSession';
 
 export default withSessionRoute(async (req, res) => {
   // This endpoint deletes the session cookie, logging the user out
-  console.log(req);
+  console.log('Logging out.');
   req.session.destroy();
   res.json({
     isLoggedIn: false,

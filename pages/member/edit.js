@@ -9,8 +9,7 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function MemberEdit() {
   const router = useRouter();
-  const { user, mutateUser } = useUser();
-  const [isNewMember, setIsNewMember] = useState(!user?.isMember);
+  const { user, mutateUser } = useUser({ redirectTo: '/?login' });
 
   const defaultFormFields = {
     team: '',
@@ -18,33 +17,63 @@ export default function MemberEdit() {
     last_name: '',
     goes_by: '',
     pronouns: '',
-    // avatar: null,
+    // avatar: null, // pending implementation
     link: '',
     location: '',
-    // loc_lat: null,
-    // loc_long: null,
+    // loc_lat: null, // pending implementation
+    // loc_long: null, // pending implementation
     interests: '',
     pets: '',
     custom_answer: '',
     collab_answer: '',
-    // reactions_count: null,
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
+  const [isNewMember, setIsNewMember] = useState(true);
   const [teamData, setTeamData] = useState(null);
 
   useEffect(() => {
-    // Get team details
-    if (user) {
+    if (!user || !user?.isLoggedIn) {
+      return; // Wait for session info
+    }
+
+    const team = user?.isAdmin ?? user?.hasInvite ?? user?.team ?? false;
+
+    if (team) {
+      if (user.isMember) {
+        setIsNewMember(false);
+        // Get member details
+        (async () => {
+          try {
+            const response = await axios({
+              method: 'get',
+              url: `members/${user.isMember}`,
+              headers: {
+                Authorization: `Token ${user.auth_token}`,
+              },
+            });
+            // console.log(response.data);
+            if (response.status === 200) {
+              setFormFields({ ...response.data });
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        })();
+      } else {
+        setFormFields({ ...formFields, team: team });
+      }
+
+      // Get team details
       (async () => {
         try {
           const response = await axios({
             method: 'get',
-            url: `teams/${user?.isAdmin ?? user?.hasInvite}`,
+            url: `teams/${team}`,
             headers: {
               Authorization: `Token ${user?.auth_token}`,
             },
           });
-          console.log(response.data);
+          // console.log(response.data);
           if (response.status === 200) {
             setTeamData({ ...response.data });
           }
@@ -52,6 +81,8 @@ export default function MemberEdit() {
           console.error(error);
         }
       })();
+    } else {
+      console.warn('No team information in user session.');
     }
   }, [user]);
 
@@ -81,8 +112,15 @@ export default function MemberEdit() {
         },
       });
       console.log(res);
-      if (200 <= res.status && res.status <= 299) {
+      if (res.status === 201) {
+        // created, go to team view
+        router.push('/team');
+      } else if (res.status === 200) {
+        // saved, go to profile
         router.push('/member');
+      } else {
+        // TODO: Handle unexpected response.
+        console.warn(`Unexpected response ${res.status}`);
       }
     } catch (err) {
       // TODO: Handle error
@@ -90,8 +128,8 @@ export default function MemberEdit() {
     }
   }
 
-  if (!user?.isAdmin && !user?.hasInvite) {
-    return <p>Loading...</p>;
+  if (!user) {
+    return <p>Loading user session...</p>;
   }
 
   return (
@@ -109,7 +147,7 @@ export default function MemberEdit() {
             type='hidden'
             id='team'
             name='team'
-            value={user?.isAdmin ?? user?.hasInvite}
+            value={formFields.team}
             onChange={handleChange}
           />
           <label htmlFor='first_name'>name:</label>
