@@ -7,7 +7,7 @@ import useUser from '../../lib/useUser';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function TeamEdit() {
+export default function MemberEdit() {
   const router = useRouter();
   const { user, mutateUser } = useUser();
   const [isNewMember, setIsNewMember] = useState(!user?.isMember);
@@ -90,6 +90,10 @@ export default function TeamEdit() {
     }
   }
 
+  if (!user?.isAdmin && !user?.hasInvite) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <Head>
@@ -105,7 +109,7 @@ export default function TeamEdit() {
             type='hidden'
             id='team'
             name='team'
-            value={teamData.id}
+            value={user?.isAdmin ?? user?.hasInvite}
             onChange={handleChange}
           />
           <label htmlFor='first_name'>name:</label>
