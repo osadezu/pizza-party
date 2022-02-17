@@ -4,6 +4,12 @@ import { withSessionRoute } from '../../lib/withSession';
 // https://github.com/vvo/iron-session
 
 export default withSessionRoute(async (req, res) => {
+  // This endpoint deletes the session cookie, logging the user out
+  console.log(req);
   req.session.destroy();
-  res.json({ isLoggedIn: false, login: '', avatarUrl: '' });
+  res.json({
+    isLoggedIn: false,
+    email: null,
+    auth_token: null,
+  });
 });

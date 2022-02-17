@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Router from 'next/router';
+import router from 'next/router';
 import axios from 'axios';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
@@ -35,7 +35,7 @@ export default function Signup() {
         const data = await response.json();
         if (response.ok) {
           console.log('Logged in, redirecting.', data);
-          Router.push('/team');
+          router.push('/team');
         }
       }
     } catch (err) {

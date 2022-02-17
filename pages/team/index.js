@@ -27,7 +27,7 @@ export default function Team() {
     } else {
       newFormFields = { ...formFields, [e.target.id]: e.target.value };
     }
-    console.log(newFormFields);
+    // console.log(newFormFields);
     setFormFields(newFormFields);
   }
 
