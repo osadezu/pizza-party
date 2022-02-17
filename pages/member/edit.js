@@ -10,11 +10,10 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 export default function TeamEdit() {
   const router = useRouter();
   const { user, mutateUser } = useUser();
-  const { newMember } = router.query;
-  const [isNewMember, setIsNewMember] = useState(newMember === 'true');
+  const [isNewMember, setIsNewMember] = useState(!user?.isMember);
 
   const defaultFormFields = {
-    team: user?.isAdmin ?? user?.hasInvite,
+    team: '',
     first_name: '',
     last_name: '',
     goes_by: '',
@@ -35,33 +34,35 @@ export default function TeamEdit() {
 
   useEffect(() => {
     // Get team details
-    (async () => {
-      try {
-        const response = await axios({
-          method: 'get',
-          url: `teams/${user?.isAdmin ?? user?.hasInvite}`,
-          headers: {
-            Authorization: `Token ${user.auth_token}`,
-          },
-        });
-        console.log(response.data);
-        if (response.status === 200) {
-          setFormFields({ ...response.data });
+    if (user) {
+      (async () => {
+        try {
+          const response = await axios({
+            method: 'get',
+            url: `teams/${user?.isAdmin ?? user?.hasInvite}`,
+            headers: {
+              Authorization: `Token ${user?.auth_token}`,
+            },
+          });
+          console.log(response.data);
+          if (response.status === 200) {
+            setTeamData({ ...response.data });
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
+      })();
+    }
   }, [user]);
 
   function handleChange(e) {
     let newFormFields;
-    if (e.target.id === 'hero_image') {
-      newFormFields = { ...formFields, hero_image: e.target.files[0] };
+    if (e.target.id === 'avatar') {
+      newFormFields = { ...formFields, avatar: e.target.files[0] };
     } else {
       newFormFields = { ...formFields, [e.target.id]: e.target.value };
     }
-    console.log(newFormFields);
+    // console.log(newFormFields);
     setFormFields(newFormFields);
   }
 
@@ -72,7 +73,7 @@ export default function TeamEdit() {
     try {
       const res = await axios({
         method: isNewMember ? 'post' : 'put',
-        url: isNewMember ? 'teams/' : `teams/${user.isAdmin}`,
+        url: isNewMember ? 'members/' : `members/${user.isAdmin}`,
         data: data,
         headers: {
           'content-type': 'multipart/form-data',
@@ -80,9 +81,8 @@ export default function TeamEdit() {
         },
       });
       console.log(res);
-      if (res.status === 201) {
-        // Created
-        router.push('/team/member?newmember=true');
+      if (200 <= res.status && res.status <= 299) {
+        router.push('/member');
       }
     } catch (err) {
       // TODO: Handle error
@@ -93,64 +93,130 @@ export default function TeamEdit() {
   return (
     <>
       <Head>
-        <title>PizzaParty - Edit Team</title>
+        <title>PizzaParty - Edit Team Member</title>
       </Head>
-      <h3>Enter your team details!</h3>
+      <h3>What&#39;s your slice?</h3>
       <div className='flex flex-col justify-center items-center gap-4'>
         <form
           encType='multipart/form-data'
           onSubmit={handleSubmit}
           className='grid grid-cols-2 gap-4 place-items-end'>
-          <label htmlFor='name'>team name:</label>
+          <input
+            type='hidden'
+            id='team'
+            name='team'
+            value={teamData.id}
+            onChange={handleChange}
+          />
+          <label htmlFor='first_name'>name:</label>
           <input
             type='text'
-            id='name'
-            name='name'
-            value={formFields.name}
+            id='first_name'
+            name='first_name'
+            value={formFields.first_name}
             onChange={handleChange}
-            maxLength='100'
+            maxLength='25'
             required
           />
-          <label htmlFor='blurb'>blurb:</label>
+          <label htmlFor='last_name'>last name:</label>
           <input
             type='text'
-            id='blurb'
-            name='blurb'
-            value={formFields.blurb}
+            id='last_name'
+            name='last_name'
+            value={formFields.last_name}
+            onChange={handleChange}
+            maxLength='25'
+          />
+          <label htmlFor='goes_by'>a.k.a.:</label>
+          <input
+            type='text'
+            id='goes_by'
+            name='goes_by'
+            value={formFields.goes_by}
+            onChange={handleChange}
+            maxLength='25'
+          />
+          <label htmlFor='pronouns'>pronouns:</label>
+          <input
+            type='text'
+            id='pronouns'
+            name='pronouns'
+            value={formFields.pronouns}
+            onChange={handleChange}
+            maxLength='25'
+          />
+          <label htmlFor='link'>website:</label>
+          <input
+            type='text'
+            id='link'
+            name='link'
+            value={formFields.link}
+            onChange={handleChange}
+            maxLength='100'
+          />
+          {/* TODO: Select from a list */}
+          <label htmlFor='location'>location:</label>
+          <input
+            type='text'
+            id='location'
+            name='location'
+            value={formFields.location}
+            onChange={handleChange}
+            maxLength='100'
+          />
+          <label htmlFor='interests'>interests &amp; jams:</label>
+          <input
+            type='text'
+            id='interests'
+            name='interests'
+            value={formFields.interests}
             onChange={handleChange}
             maxLength='280'
           />
+          <label htmlFor='pets'>pets / imaginary friends:</label>
+          <input
+            type='text'
+            id='pets'
+            name='pets'
+            value={formFields.pets}
+            onChange={handleChange}
+            maxLength='100'
+          />
+          {teamData?.custom_question?.length && (
+            <>
+              <label htmlFor='custom_answer'>{teamData.custom_question}:</label>
+              <input
+                type='text'
+                id='custom_answer'
+                name='custom_answer'
+                value={formFields.custom_answer}
+                onChange={handleChange}
+                maxLength='280'
+              />
+            </>
+          )}
 
-          <label htmlFor='custom_prompt'>custom question:</label>
+          <label htmlFor='collab_answer'>
+            {teamData?.custom_prompt ?? 'your thoughts for the team:'}
+          </label>
           <input
             type='text'
-            id='custom_prompt'
-            name='custom_prompt'
-            value={formFields.custom_prompt}
+            id='collab_answer'
+            name='collab_answer'
+            value={formFields.collab_answer}
             onChange={handleChange}
-            maxLength='150'
+            maxLength='280'
           />
-          <label htmlFor='collab_prompt'>collab prompt:</label>
-          <input
-            type='text'
-            id='collab_prompt'
-            name='collab_prompt'
-            value={formFields.collab_prompt}
-            onChange={handleChange}
-            maxLength='150'
-          />
-          <label htmlFor='hero_image'>image:</label>
+          <label htmlFor='avatar'>profile image:</label>
           <input
             type='file'
-            id='hero_image'
-            name='hero_image'
+            id='avatar'
+            name='avatar'
             accept='image/png, image/jpeg'
             onChange={handleChange}
           />
-          {/* TODO: required_fields Add set of checkboxes to make member fields required */}
-          {/* TODO: link Add field for custom link option */}
           <button type='submit' className='col-span-2'>
-            {isNewMember ? 'Go Team!' : 'Save'}
+            {isNewMember ? 'Make me!' : 'Save'}
           </button>
         </form>
       </div>
