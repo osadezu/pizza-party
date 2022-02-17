@@ -11,8 +11,7 @@ export default function TeamEdit() {
   const router = useRouter();
   const { user, mutateUser } = useUser({ redirectTo: '/?login' });
 
-  const { newTeam } = router.query;
-  const [isNewTeam, setIsNewTeam] = useState(newTeam === 'true');
+  const [makingNewTeam, setMakingNewTeam] = useState(true);
 
   const defaultFormFields = {
     name: '',
@@ -24,13 +23,14 @@ export default function TeamEdit() {
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   useEffect(() => {
-    if (!user?.isLoggedIn) {
-      console.log('Not logged in.', user);
+    let isMounted = true;
+
+    if (!user || !user?.isLoggedIn) {
       return; // Wait for session info
     }
 
-    if (user?.isAdmin) {
-      setIsNewTeam(false);
+    if (user.isAdmin) {
+      if (isMounted) setMakingNewTeam(false);
       // Get user's team details
       (async () => {
         try {
@@ -43,13 +43,16 @@ export default function TeamEdit() {
           });
           // console.log(response.data);
           if (response.status === 200) {
-            setFormFields({ ...response.data });
+            if (isMounted) setFormFields({ ...response.data });
           }
         } catch (error) {
           console.error(error);
         }
       })();
     }
+    return () => {
+      isMounted = false;
+    };
   }, [user]);
 
   function handleChange(e) {
@@ -69,8 +72,8 @@ export default function TeamEdit() {
 
     try {
       const res = await axios({
-        method: isNewTeam ? 'post' : 'put',
-        url: isNewTeam ? 'teams/' : `teams/${user.isAdmin}`,
+        method: makingNewTeam ? 'post' : 'put',
+        url: makingNewTeam ? 'teams/' : `teams/${user.isAdmin}`,
         data: data,
         headers: {
           'content-type': 'multipart/form-data',
@@ -80,7 +83,9 @@ export default function TeamEdit() {
       // console.log(res);
       if (res.status === 201) {
         // Created
-        router.push('/member/edit');
+        // Manually update user session while backend returns
+        mutateUser({ ...user, isAdmin: res.data.id });
+        router.push('/member/edit?newMember');
       } else if (res.status === 200) {
         // Updated
         router.push('/team');
@@ -155,7 +160,7 @@ export default function TeamEdit() {
           {/* TODO: required_fields Add set of checkboxes to make member fields required */}
           {/* TODO: link Add field for custom link option */}
           <button type='submit' className='col-span-2'>
-            {isNewTeam ? 'Go Team!' : 'Save'}
+            {makingNewTeam ? 'Go Team!' : 'Save'}
           </button>
         </form>
       </div>

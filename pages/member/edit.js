@@ -28,10 +28,12 @@ export default function MemberEdit() {
     collab_answer: '',
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const [isNewMember, setIsNewMember] = useState(true);
+  const [makingNewMember, setMakingNewMember] = useState(true);
   const [teamData, setTeamData] = useState(null);
 
   useEffect(() => {
+    let isMounted = true;
+
     if (!user || !user?.isLoggedIn) {
       return; // Wait for session info
     }
@@ -40,7 +42,7 @@ export default function MemberEdit() {
 
     if (team) {
       if (user.isMember) {
-        setIsNewMember(false);
+        if (isMounted) setMakingNewMember(false);
         // Get member details
         (async () => {
           try {
@@ -53,14 +55,14 @@ export default function MemberEdit() {
             });
             // console.log(response.data);
             if (response.status === 200) {
-              setFormFields({ ...response.data });
+              if (isMounted) setFormFields({ ...response.data });
             }
           } catch (error) {
             console.error(error);
           }
         })();
       } else {
-        setFormFields({ ...formFields, team: team });
+        if (isMounted) setFormFields({ ...formFields, team: team });
       }
 
       // Get team details
@@ -75,7 +77,7 @@ export default function MemberEdit() {
           });
           // console.log(response.data);
           if (response.status === 200) {
-            setTeamData({ ...response.data });
+            if (isMounted) setTeamData({ ...response.data });
           }
         } catch (error) {
           console.error(error);
@@ -84,6 +86,10 @@ export default function MemberEdit() {
     } else {
       console.warn('No team information in user session.');
     }
+    return () => {
+      isMounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   function handleChange(e) {
@@ -103,8 +109,8 @@ export default function MemberEdit() {
 
     try {
       const res = await axios({
-        method: isNewMember ? 'post' : 'put',
-        url: isNewMember ? 'members/' : `members/${user.isMember}`,
+        method: makingNewMember ? 'post' : 'put',
+        url: makingNewMember ? 'members/' : `members/${user.isMember}`,
         data: data,
         headers: {
           'content-type': 'multipart/form-data',
@@ -113,7 +119,10 @@ export default function MemberEdit() {
       });
       console.log(res);
       if (res.status === 201) {
-        // created, go to team view
+        // Created, manually update user session while backend returns
+        setMakingNewMember(false);
+        mutateUser({ ...user, isMember: res.data.id });
+        // Go to team view
         router.push('/team');
       } else if (res.status === 200) {
         // saved, go to profile
@@ -258,7 +267,7 @@ export default function MemberEdit() {
             onChange={handleChange}
           />
           <button type='submit' className='col-span-2'>
-            {isNewMember ? 'Make me!' : 'Save'}
+            {makingNewMember ? 'Make me!' : 'Save'}
           </button>
         </form>
       </div>

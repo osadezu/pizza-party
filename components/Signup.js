@@ -34,11 +34,13 @@ export default function Signup() {
   async function handleLogin(body) {
     try {
       mutateUser(
-        await fetch('/api/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
-        })
+        await (
+          await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          })
+        ).json()
       );
     } catch (error) {
       // TODO: Handle error
@@ -57,9 +59,8 @@ export default function Signup() {
           password: formFields.password,
         },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 200) {
-        console.log(res.data);
         handleLogin({
           email: formFields.email,
           auth_token: res.data.auth_token,
@@ -83,7 +84,7 @@ export default function Signup() {
           re_password: formFields.re_password,
         },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 201) {
         getToken();
       }
