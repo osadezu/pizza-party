@@ -74,6 +74,12 @@ export default function Team() {
       <h2>{team.name}</h2>
       <h3>{team.blurb}</h3>
       <div>
+        <h4>{team.collab_prompt}</h4>
+        {members.map((member, i) => (
+          <div key={i}>{member.collab_answer}</div>
+        ))}
+      </div>
+      <div>
         {members.map((member, i) => {
           return (
             <MemberCard

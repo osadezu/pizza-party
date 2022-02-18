@@ -11,7 +11,6 @@ A fast and easy way for new remote teams to break the zoom ice. Through a shared
 - [Next.js](https://nextjs.org/) App painlessly deployed on [Vercel](https://vercel.com/)
 - Django-based REST API with PostgreSQL deployed on Heroku
 - Session authentication data stored in encrypted cookies using [iron-session](https://github.com/vvo/iron-session)
-- (vestigial Tailwind code in the process of being cleaned out)
 
 ### pizza-party-api
 

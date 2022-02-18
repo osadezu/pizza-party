@@ -73,9 +73,7 @@ export default function Signup() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className='grid grid-cols-2 gap-4 place-items-end'>
+    <form onSubmit={handleSubmit} className='login-form'>
       <label htmlFor='email'>email:</label>
       <input
         type='email'

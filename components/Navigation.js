@@ -11,11 +11,11 @@ export default function Navigation() {
   // console.log('Nav logging pathame:', router.pathname);
 
   if (!user?.isLoggedIn) {
-    return <div className='absolute right-0 top-20'></div>;
+    return <div id='navigation'></div>;
   }
 
   return (
-    <div className='absolute right-0 top-20'>
+    <div id='navigation'>
       <ul>
         <li>
           <h4>Team Time</h4>

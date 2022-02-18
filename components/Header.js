@@ -13,8 +13,8 @@ export default function Header() {
 
   return (
     <div id='header-wrapper'>
-      <div className='flex items-end'>
-        <h1 className='font-cursive text-7xl mt-4 mx-14'>PizzaParty 🍕</h1>
+      <div className='header-titles'>
+        <h1 className='app-title'>PizzaParty 🍕</h1>
         {/* {loggedIn && (
           <h2 className='relative top-14 font-mono text-4xl font-medium'>
             Your Team Name

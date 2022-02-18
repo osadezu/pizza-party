@@ -277,6 +277,7 @@ export default function MemberEdit() {
             value={formFields.collab_answer}
             onChange={handleChange}
             maxLength='280'
+            required
           />
           <label htmlFor='avatar'>profile image:</label>
           <input
