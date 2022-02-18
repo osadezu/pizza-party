@@ -12,33 +12,9 @@ export default withSessionRoute(async (req, res) => {
 
   if (req.session.user?.email && req.session.user?.auth_token) {
     // This endpoint returns the session.user object and sets isLoggedIn: true
-    // Check if user owns a team
-    try {
-      const teamsResponse = await axios({
-        method: 'get',
-        url: 'teams/',
-        headers: {
-          Authorization: `Token ${req.session.user.auth_token}`,
-        },
-      });
-      // console.log(teamsResponse.data);
-      if (teamsResponse.status === 200) {
-        const team = teamsResponse.data.find(
-          (team) => team.admin === req.session.user.email
-        );
-        if (team) {
-          req.session.user = {
-            ...req.session.user,
-            isAdmin: team.id,
-            teamName: team.name,
-          };
-        } else {
-          req.session.user = { ...req.session.user, isAdmin: false };
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
+
+    // TODO: Simplify this logic by making django endpoints
+    // which cross - populate users, members and teams!!!
 
     // Check if user is member
     try {
@@ -63,6 +39,44 @@ export default withSessionRoute(async (req, res) => {
           };
         } else {
           req.session.user = { ...req.session.user, isMember: false };
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+    const userTeam = req.session.user.hasInvite ?? req.session.user.isMember;
+
+    // Check if user owns a team
+    try {
+      const teamsResponse = await axios({
+        method: 'get',
+        url: 'teams/',
+        headers: {
+          Authorization: `Token ${req.session.user.auth_token}`,
+        },
+      });
+      // console.log(teamsResponse.data);
+      if (teamsResponse.status === 200) {
+        // Check if user is admin
+        const team = teamsResponse.data.find(
+          (team) => team.admin === req.session.user.email
+        );
+        if (team) {
+          req.session.user = {
+            ...req.session.user,
+            isAdmin: team.id,
+            teamName: team.name,
+          };
+        } else if (userTeam) {
+          // User is not admin
+          req.session.user = { ...req.session.user, isAdmin: false };
+
+          // get non-admin member's team
+          const team = teamsResponse.data.find((team) => team.id === userTeam);
+          if (team) {
+            req.session.user = { ...req.session.user, teamName: team.name };
+          }
         }
       }
     } catch (error) {

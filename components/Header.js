@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 import useUser from '../lib/useUser';
 
@@ -6,7 +7,7 @@ export default function Header() {
   const router = useRouter();
   const { user, mutateUser } = useUser();
 
-  console.log('Header user:', user);
+  // console.log('Header user:', user);
 
   const loggedIn = user?.isLoggedIn;
 
@@ -21,19 +22,21 @@ export default function Header() {
         )} */}
       </div>
       <div className='mx-10'>
-        {loggedIn ? user.email : 'Logged Out'}
         {loggedIn && (
-          <button
-            onClick={async (e) => {
-              e.preventDefault();
-              mutateUser(
-                await (await fetch('/api/logout', { method: 'POST' })).json(),
-                false
-              );
-              router.push('/');
-            }}>
-            Log Out
-          </button>
+          <>
+            <p>Logged in as {user?.email}</p>
+            <button
+              onClick={async (e) => {
+                e.preventDefault();
+                mutateUser(
+                  await (await fetch('/api/logout', { method: 'POST' })).json(),
+                  false
+                );
+                router.push('/');
+              }}>
+              Log Out
+            </button>
+          </>
         )}
       </div>
     </div>

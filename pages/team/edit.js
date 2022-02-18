@@ -22,20 +22,19 @@ export default function TeamEdit() {
     link: '',
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
-  // const [inviteLink, setInviteLink] = useState('');
 
   // // Make invite link
-  // // TODO: build this on Django model and add "safety" string.
+  // const [inviteLink, setInviteLink] = useState('');
   // useEffect(() => {
   //   let isMounted = true;
-  // // Keep from running server-side
-  // if (!makingNewTeam && typeof window !== 'undefined') {
-  //   // Make invite link
-  //   if (isMounted)
-  //     setInviteLink(
-  //       `${window.location.origin}/?signUp&invite=${formFields.id}`
-  //     );
-  // }
+  //   // Keep from running server-side
+  //   if (!makingNewTeam && typeof window !== 'undefined') {
+  //     // Make invite link
+  //     if (isMounted)
+  //       setInviteLink(
+  //         `${window.location.origin}/?signUp&invite=${formFields.id}`
+  //       );
+  //   }
   //   return () => {
   //     isMounted = false;
   //   };
@@ -121,16 +120,26 @@ export default function TeamEdit() {
   function handleCopyLink() {
     // Keep from running server-side
     if (!makingNewTeam && typeof window !== 'undefined') {
-      // Make invite link
-      // This works in iOS on an https connection
+      // TODO: THIS INVITE LINK IMPLEMENTATION IS NOT SECURE!
+      // Link must contain a randomized key and the validity must be verified in the backend.
+      // bake link generation inton Django model and add "safety" string.
       navigator.clipboard
-        .writeText(`${window.location.origin}/?signUp&invite=${formFields.id}`)
+        .writeText(
+          `${window.location.origin}/?signUp&invite=${
+            formFields.id
+          }&teamName=${encodeURIComponent(formFields.name)}`
+        )
         .then(() => setCopied(true));
     }
   }
 
   if (!user) {
     return <p>Loading user session...</p>;
+  }
+
+  // TODO: Improve the signup logic to avoid double redirect
+  if (user?.isLoggedIn && user.hasInvite) {
+    router.push('/member/edit?newMember');
   }
 
   return (
@@ -163,26 +172,25 @@ export default function TeamEdit() {
             onChange={handleChange}
             maxLength='280'
           />
-
           <label htmlFor='custom_prompt'>custom question:</label>
           <input
             type='text'
             id='custom_prompt'
             name='custom_prompt'
+            placeholder="for each member's profile"
             value={formFields.custom_prompt}
             onChange={handleChange}
             maxLength='150'
-            required
           />
-          <label htmlFor='collab_prompt'>collab prompt:</label>
+          <label htmlFor='collab_prompt'>collaborative prompt:</label>
           <input
             type='text'
             id='collab_prompt'
             name='collab_prompt'
+            placeholder="for your team's rumpus"
             value={formFields.collab_prompt}
             onChange={handleChange}
             maxLength='150'
-            required
           />
           {/* <label htmlFor='hero_image'>image:</label>
           <input

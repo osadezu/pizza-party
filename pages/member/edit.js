@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import Head from 'next/head';
 import axios from 'axios';
 
@@ -38,7 +39,7 @@ export default function MemberEdit() {
       return; // Wait for session info
     }
 
-    const team = user?.isAdmin ?? user?.hasInvite ?? user?.team ?? false;
+    const team = user?.isAdmin || user?.hasInvite || user?.team || false;
 
     if (team) {
       if (user.isMember) {
@@ -84,7 +85,8 @@ export default function MemberEdit() {
         }
       })();
     } else {
-      console.warn('No team information in user session.');
+      // Handle error state in case user didn't complete login process
+      // console.warn('No team information in user session.');
     }
     return () => {
       isMounted = false;
@@ -137,7 +139,7 @@ export default function MemberEdit() {
     }
   }
 
-  if (!user) {
+  if (!user || !teamData) {
     return <p>Loading user session...</p>;
   }
 
@@ -147,6 +149,16 @@ export default function MemberEdit() {
         <title>PizzaParty - Edit Team Member</title>
       </Head>
       <h3>What&#39;s your slice?</h3>
+      <div>
+        {user.avatar && (
+          <Image
+            src={user?.avatar}
+            alt={`${user?.email} avatar`}
+            width={200}
+            height={200}
+          />
+        )}
+      </div>
       <div className='flex flex-col justify-center items-center gap-4'>
         <form
           encType='multipart/form-data'
@@ -178,21 +190,13 @@ export default function MemberEdit() {
             onChange={handleChange}
             maxLength='25'
           />
-          <label htmlFor='goes_by'>a.k.a.:</label>
+          <label htmlFor='goes_by'>nickname:</label>
           <input
             type='text'
             id='goes_by'
             name='goes_by'
+            placeholder='or preferred name'
             value={formFields.goes_by}
-            onChange={handleChange}
-            maxLength='25'
-          />
-          <label htmlFor='pronouns'>pronouns:</label>
-          <input
-            type='text'
-            id='pronouns'
-            name='pronouns'
-            value={formFields.pronouns}
             onChange={handleChange}
             maxLength='25'
           />
@@ -204,6 +208,15 @@ export default function MemberEdit() {
             value={formFields.link}
             onChange={handleChange}
             maxLength='100'
+          />
+          <label htmlFor='pronouns'>pronouns:</label>
+          <input
+            type='text'
+            id='pronouns'
+            name='pronouns'
+            value={formFields.pronouns}
+            onChange={handleChange}
+            maxLength='25'
           />
           {/* TODO: Select from a list */}
           <label htmlFor='location'>location:</label>
@@ -233,9 +246,13 @@ export default function MemberEdit() {
             onChange={handleChange}
             maxLength='100'
           />
-          {teamData?.custom_question?.length && (
+          {teamData.custom_prompt && (
             <>
-              <label htmlFor='custom_answer'>{teamData.custom_question}:</label>
+              <label htmlFor='custom_answer'>
+                {teamData.custom_prompt +
+                  // Add colon if question doesn't end in '?'
+                  (teamData.custom_prompt.split('').pop() === '?' ? '' : ':')}
+              </label>
               <input
                 type='text'
                 id='custom_answer'
@@ -248,7 +265,10 @@ export default function MemberEdit() {
           )}
 
           <label htmlFor='collab_answer'>
-            {teamData?.custom_prompt ?? 'your thoughts for the team:'}
+            {teamData.collab_prompt
+              ? teamData.collab_prompt +
+                (teamData.collab_prompt.split('').pop() === '?' ? '' : ':')
+              : 'your thoughts for the team:'}
           </label>
           <input
             type='text'

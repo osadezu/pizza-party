@@ -3,13 +3,12 @@ import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import useUser from '../lib/useUser';
+import user from '../pages/api/user';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function Signup() {
-  const router = useRouter();
-
-  const { user, mutateUser } = useUser({
+export default function Signup({ hasInvite }) {
+  const { mutateUser } = useUser({
     redirectTo: '/team/edit?newTeam',
     redirectIfFound: true,
   });
@@ -32,6 +31,7 @@ export default function Signup() {
   }
 
   async function handleLogin(body) {
+    console.log(JSON.stringify(body));
     try {
       mutateUser(
         await (
@@ -61,9 +61,13 @@ export default function Signup() {
       });
       // console.log(res);
       if (res.status === 200) {
+        // TODO: THIS INVITE LINK IMPLEMENTATION IS NOT SECURE!
+        // Link must contain a randomized key and the validity must be verified in the backend.
         handleLogin({
           email: formFields.email,
           auth_token: res.data.auth_token,
+          // If has invite is undefined, property will be ignored by handleLogin's stringify
+          hasInvite: hasInvite,
         });
       }
     } catch (error) {
