@@ -31,7 +31,6 @@ export default function Signup({ hasInvite }) {
   }
 
   async function handleLogin(body) {
-    console.log(JSON.stringify(body));
     try {
       mutateUser(
         await (

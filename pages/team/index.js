@@ -72,15 +72,19 @@ export default function Team() {
         <title>PizzaParty - Your Team</title>
       </Head>
       <div className='main-wrapper'>
-        <h2>{team.name}</h2>
-        <h3>{team.blurb}</h3>
-        <div className='collab'>
+        <div className='team-side'>
+          <h2>{team.name}</h2>
+          <h3>{team.blurb}</h3>
           <h4>{team.collab_prompt}</h4>
-          {members.map((member, i) => (
-            <div key={i}>{member.collab_answer}</div>
-          ))}
+          <div className='collab'>
+            {members.map((member, i) => (
+              <div className='collab-entry messy' key={i}>
+                {member.collab_answer}
+              </div>
+            ))}
+          </div>
         </div>
-        <div>
+        <div className='member-side'>
           {members.map((member, i) => {
             return (
               <MemberCard

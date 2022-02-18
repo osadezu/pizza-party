@@ -14,15 +14,17 @@ export default function MemberCard({ member, custPrompt }) {
   return (
     <div className='member-card sketchy'>
       {member.avatar && (
-        <Image
-          src={member.avatar}
-          alt={`${screenName}'s avatar`}
-          width='100'
-          height='100'
-        />
+        <div className='avatar'>
+          <Image
+            src={member.avatar}
+            alt={`${screenName}'s avatar`}
+            layout='fill'
+            objectFit='contain'
+          />
+        </div>
       )}
       <div className='details'>
-        <h4>{screenName}</h4>
+        <h4 className='no-break'>{screenName}</h4>
         {secondaryName && <p className='sec-name'>{secondaryName}</p>}
         {member.pronouns && (
           <p>

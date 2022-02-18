@@ -119,7 +119,7 @@ export default function MemberEdit() {
           Authorization: `Token ${user?.auth_token}`,
         },
       });
-      console.log(res);
+      // console.log(res);
       if (res.status === 201) {
         // Created, manually update user session while backend returns
         setMakingNewMember(false);
@@ -152,12 +152,14 @@ export default function MemberEdit() {
         <div>
           <h3>What&#39;s your slice?</h3>
           {user.avatar && (
-            <Image
-              src={user?.avatar}
-              alt={`${user?.email} avatar`}
-              width={200}
-              height={200}
-            />
+            <div className='profile-avatar'>
+              <Image
+                src={user?.avatar}
+                alt={`${user?.email} avatar`}
+                layout='fill'
+                objectFit='contain'
+              />
+            </div>
           )}
         </div>
 
