@@ -1,5 +1,6 @@
 module.exports = {
   reactStrictMode: true,
+  optimizeFonts: false,
   images: {
     domains: ['pizza-party-teams.s3.amazonaws.com'],
   },

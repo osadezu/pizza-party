@@ -166,7 +166,7 @@ main > div {
 .member-side {
   max-width: 30vw;
   grid-area: r;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 .collab {
   display: flex;
