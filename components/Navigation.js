@@ -20,20 +20,19 @@ export default function Navigation() {
         <li>
           <h3>Team Time</h3>
         </li>
-        <li>
+        <li className='link'>
           <Link href='/team'>
             <a className={router.pathname == '/team' ? 'Active' : null}>
               Rumpus
             </a>
           </Link>
         </li>
-        <li>
-          <Link href='/team/map' className='myClass'>
-            Map
-          </Link>
+        <li className='link'>
+          <p>🚧 Map</p>
+          <span>coming soon!</span>
         </li>
         {user?.isAdmin && (
-          <li>
+          <li className='link'>
             <Link href='/team/edit'>
               <a className={router.pathname == '/team/edit' ? 'Active' : ''}>
                 Edit Team
@@ -51,7 +50,7 @@ export default function Navigation() {
         <li>
           <h3>Me Time</h3>
         </li>
-        <li>
+        <li className='link'>
           <Link href='/member/edit'>
             <a className={router.pathname == '/member/edit' ? 'Active' : ''}>
               Member Profile

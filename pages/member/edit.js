@@ -148,19 +148,23 @@ export default function MemberEdit() {
       <Head>
         <title>PizzaParty - Edit Team Member</title>
       </Head>
-      <h3>What&#39;s your slice?</h3>
-      <div>
-        {user.avatar && (
-          <Image
-            src={user?.avatar}
-            alt={`${user?.email} avatar`}
-            width={200}
-            height={200}
-          />
-        )}
-      </div>
-      <div>
-        <form encType='multipart/form-data' onSubmit={handleSubmit}>
+      <div className='main-wrapper'>
+        <div>
+          <h3>What&#39;s your slice?</h3>
+          {user.avatar && (
+            <Image
+              src={user?.avatar}
+              alt={`${user?.email} avatar`}
+              width={200}
+              height={200}
+            />
+          )}
+        </div>
+
+        <form
+          encType='multipart/form-data'
+          onSubmit={handleSubmit}
+          className='details-form'>
           <input
             type='hidden'
             id='team'

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default function MemberCard({ member, custPrompt }) {
   let screenName;
@@ -11,26 +12,51 @@ export default function MemberCard({ member, custPrompt }) {
   }
 
   return (
-    <div className='member-card'>
+    <div className='member-card sketchy'>
       {member.avatar && (
         <Image
           src={member.avatar}
           alt={`${screenName}'s avatar`}
-          width='150'
-          height='150'
+          width='100'
+          height='100'
         />
       )}
-      <div>
+      <div className='details'>
         <h4>{screenName}</h4>
-        {secondaryName && <p>{secondaryName}</p>}
-        {member.pronouns && <p>{member.pronouns}</p>}
-        {member.location && <p>{member.location}</p>}
-        {member.interests && <p>{member.interests}</p>}
-        {member.pets && <p>{member.pets}</p>}
+        {secondaryName && <p className='sec-name'>{secondaryName}</p>}
+        {member.pronouns && (
+          <p>
+            <span>pronouns</span>
+            {member.pronouns}
+          </p>
+        )}
+        {member.location && (
+          <p>
+            <span>location</span> {member.location}
+          </p>
+        )}
+        {member.interests && (
+          <p>
+            <span>interests</span>
+            {member.interests}
+          </p>
+        )}
+        {member.pets && (
+          <p>
+            <span>pets</span>
+            {member.pets}
+          </p>
+        )}
+        {member.link && (
+          <>
+            <span>🔗</span>
+            <Link href={member.link}>{member.link}</Link>
+          </>
+        )}
       </div>
       {member.custom_answer && (
-        <div>
-          <p>{custPrompt}</p>
+        <div className='answer'>
+          <p className='prompt'>{custPrompt}</p>
           <p>{member.custom_answer}</p>
         </div>
       )}

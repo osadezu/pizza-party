@@ -45,7 +45,7 @@ export default function Home() {
           <SvgGrid />
           <p>... to this!</p>
           <SvgYay />
-          <p>In seconds!</p>
+          <p>In minutes!</p>
         </div>
         <SvgTxt />
         <div className='index-right'>

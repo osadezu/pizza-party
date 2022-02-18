@@ -71,24 +71,26 @@ export default function Team() {
       <Head>
         <title>PizzaParty - Your Team</title>
       </Head>
-      <h2>{team.name}</h2>
-      <h3>{team.blurb}</h3>
-      <div>
-        <h4>{team.collab_prompt}</h4>
-        {members.map((member, i) => (
-          <div key={i}>{member.collab_answer}</div>
-        ))}
-      </div>
-      <div>
-        {members.map((member, i) => {
-          return (
-            <MemberCard
-              key={i}
-              member={member}
-              custPrompt={team.custom_prompt}
-            />
-          );
-        })}
+      <div className='main-wrapper'>
+        <h2>{team.name}</h2>
+        <h3>{team.blurb}</h3>
+        <div className='collab'>
+          <h4>{team.collab_prompt}</h4>
+          {members.map((member, i) => (
+            <div key={i}>{member.collab_answer}</div>
+          ))}
+        </div>
+        <div>
+          {members.map((member, i) => {
+            return (
+              <MemberCard
+                key={i}
+                member={member}
+                custPrompt={team.custom_prompt}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
