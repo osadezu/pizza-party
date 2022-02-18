@@ -159,11 +159,8 @@ export default function MemberEdit() {
           />
         )}
       </div>
-      <div className='flex flex-col justify-center items-center gap-4'>
-        <form
-          encType='multipart/form-data'
-          onSubmit={handleSubmit}
-          className='grid grid-cols-2 gap-4 place-items-end'>
+      <div>
+        <form encType='multipart/form-data' onSubmit={handleSubmit}>
           <input
             type='hidden'
             id='team'
@@ -287,9 +284,7 @@ export default function MemberEdit() {
             accept='image/png, image/jpeg'
             onChange={handleChange}
           />
-          <button type='submit' className='col-span-2'>
-            {makingNewMember ? 'Make me!' : 'Save'}
-          </button>
+          <button type='submit'>{makingNewMember ? 'Make me!' : 'Save'}</button>
         </form>
       </div>
     </>

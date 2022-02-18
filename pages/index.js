@@ -8,6 +8,7 @@ import Login from '../components/Login.js';
 
 import SvgGrid from '../public/images/team-grid.svg';
 import SvgYay from '../public/images/team-yay.svg';
+import SvgTxt from '../public/images/text-holder.svg';
 
 export default function Home() {
   const router = useRouter();
@@ -46,6 +47,7 @@ export default function Home() {
           <SvgYay />
           <p>In seconds!</p>
         </div>
+        <SvgTxt />
         <div className='index-right'>
           <div className='login-message'>
             {doLogin ? (
@@ -70,10 +72,7 @@ export default function Home() {
                 {!hasInvite && (
                   <p>
                     Existing user?
-                    <button
-                      type='button'
-                      className=''
-                      onClick={() => setDoLogin(!doLogin)}>
+                    <button type='button' onClick={() => setDoLogin(!doLogin)}>
                       Log In
                     </button>
                   </p>

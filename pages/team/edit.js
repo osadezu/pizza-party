@@ -147,12 +147,13 @@ export default function TeamEdit() {
       <Head>
         <title>PizzaParty - Edit Team</title>
       </Head>
-      <h3>Enter your team details!</h3>
-      <div className='flex flex-col justify-center items-center gap-4'>
+      <div className='main-wrapper'>
+        <h3>Enter your team details!</h3>
+
         <form
           encType='multipart/form-data'
           onSubmit={handleSubmit}
-          className='grid grid-cols-2 gap-4 place-items-end'>
+          className='details-form'>
           <label htmlFor='name'>team name:</label>
           <input
             type='text'
@@ -193,28 +194,28 @@ export default function TeamEdit() {
             maxLength='150'
           />
           {/* <label htmlFor='hero_image'>image:</label>
-          <input
-            type='file'
-            id='hero_image'
-            name='hero_image'
-            accept='image/png, image/jpeg'
-            onChange={handleChange}
-          /> */}
+            <input
+              type='file'
+              id='hero_image'
+              name='hero_image'
+              accept='image/png, image/jpeg'
+              onChange={handleChange}
+            /> */}
           {/* TODO: required_fields Add set of checkboxes to make member fields required */}
           {/* {!makingNewTeam && (
-            <>
-              <label htmlFor='link'>invite link:</label>
-              <input
-                type='text'
-                id='link'
-                name='link'
-                value={inviteLink}
-                // onChange={handleChange}
-                // maxLength='150'
-                readOnly
-              />
-            </>
-          )} */}
+              <>
+                <label htmlFor='link'>invite link:</label>
+                <input
+                  type='text'
+                  id='link'
+                  name='link'
+                  value={inviteLink}
+                  // onChange={handleChange}
+                  // maxLength='150'
+                  readOnly
+                />
+              </>
+            )} */}
           {!makingNewTeam && (
             <button type='button' onClick={handleCopyLink}>
               {copied ? 'Copied!' : 'Copy Invite Link'}

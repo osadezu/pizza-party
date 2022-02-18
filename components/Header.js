@@ -16,12 +16,12 @@ export default function Header() {
       <div className='header-titles'>
         <h1 className='app-title'>PizzaParty 🍕</h1>
         {/* {loggedIn && (
-          <h2 className='relative top-14 font-mono text-4xl font-medium'>
+          <h2>
             Your Team Name
           </h2>
         )} */}
       </div>
-      <div className='mx-10'>
+      <div className='header-controls'>
         {loggedIn && (
           <>
             <p>Logged in as {user?.email}</p>

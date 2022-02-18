@@ -9,22 +9,38 @@
 
 #header-wrapper {
   width: 100%;
-  position: fixed;
-  top: 0;
-
+  padding: 0 3rem;
   display: flex;
   justify-content: space-between;
   justify-items: flex-end;
+  align-items: flex-end;
 }
-.app-title {
-  margin-left: 5rem;
-  margin-top: 2rem;
+.header-controls {
+  text-align: right;
+}
+h1.app-title {
+  font-family: Virgil, Caveat, cursive;
+  font-size: 3.5rem;
+  margin-bottom: -0.5rem;
+  margin-top: 2.25rem;
 }
 
 #navigation {
-  display: fixed;
-  top: 3.5rem;
+  position: fixed;
+  width: content;
+  top: 8rem;
   right: 0;
+  padding-right: 2rem;
+}
+#navigation ul {
+  padding: 0;
+  list-style-type: none;
+}
+#navigation h3 {
+  margin: 0.5rem 0.25rem;
+}
+#navigation li {
+  text-align: right;
 }
 
 main {
@@ -33,7 +49,7 @@ main {
 
 main > div {
   height: 100%;
-  margin: 4rem auto;
+  margin: 2rem auto;
 }
 
 .index-wrapper {
@@ -46,7 +62,6 @@ main > div {
   column-gap: 4rem;
   row-gap: 1rem;
 }
-
 .index-left {
   grid-area: l;
   display: flex;
@@ -58,7 +73,6 @@ main > div {
   font-size: 1.2em;
   margin: 0;
 }
-
 .index-right {
   grid-area: br;
   display: flex;
@@ -74,7 +88,6 @@ main > div {
   justify-content: center;
   align-items: stretch;
 }
-
 .login-form {
   width: 50%;
   display: flex;
@@ -85,4 +98,27 @@ main > div {
 }
 .login-form > label {
   margin-bottom: -0.5rem;
+}
+
+.main-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(content, 1fr));
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    'l r'
+    'l r';
+  column-gap: 4rem;
+  row-gap: 1rem;
+}
+.details-form {
+  grid-area: r;
+  width: 40vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 1.2rem;
+}
+.details-form > label {
+  margin-bottom: -1rem;
 }

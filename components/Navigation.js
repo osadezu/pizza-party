@@ -18,7 +18,7 @@ export default function Navigation() {
     <div id='navigation'>
       <ul>
         <li>
-          <h4>Team Time</h4>
+          <h3>Team Time</h3>
         </li>
         <li>
           <Link href='/team'>
@@ -49,7 +49,7 @@ export default function Navigation() {
           </Link>
         </li> */}
         <li>
-          <h4>Me Time</h4>
+          <h3>Me Time</h3>
         </li>
         <li>
           <Link href='/member/edit'>
