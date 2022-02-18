@@ -6,6 +6,8 @@ A fast and easy way for new remote teams to break the zoom ice. Through a shared
 
 🚧 https://pizza-party.osadezu.com/ 🚧 (actively under development)
 
+<!-- [![Vercel](https://img.shields.io/github/deployments/osadezu/pizza-party/production?label=vercel&logo=vercel&style=plastic)](https://pizza-party-teams.vercel.app/) -->
+
 ### Technology Stack
 
 - [Next.js](https://nextjs.org/) ([React](https://reactjs.org/)) app deployed on [Vercel](https://vercel.com/)
@@ -19,6 +21,8 @@ A fast and easy way for new remote teams to break the zoom ice. Through a shared
   - https://codepen.io/piccalilli/pen/MPLzay
   - https://codepen.io/mp/pen/kBEeKw
 - Huge shout-out to [Excalidraw](https://excalidraw.com/#json=RK85fN9wlf43MLqPG5Nx7,TRVcMeBK_V8_pC90jWjGiQ) for their amazing, free app. 
+
+<!-- ## App Screenshot -->
 
 ### pizza-party-api
 
