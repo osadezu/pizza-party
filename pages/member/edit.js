@@ -128,7 +128,7 @@ export default function MemberEdit() {
         router.push('/team');
       } else if (res.status === 200) {
         // saved, go to profile
-        router.push('/member');
+        router.push('/team');
       } else {
         // TODO: Handle unexpected response.
         console.warn(`Unexpected response ${res.status}`);

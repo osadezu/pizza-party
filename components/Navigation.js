@@ -23,8 +23,13 @@ export default function Navigation() {
         <li>
           <Link href='/team'>
             <a className={router.pathname == '/team' ? 'Active' : null}>
-              Team Rumpus
+              Rumpus
             </a>
+          </Link>
+        </li>
+        <li>
+          <Link href='/team/map' className='myClass'>
+            Map
           </Link>
         </li>
         {user?.isAdmin && (
@@ -36,18 +41,13 @@ export default function Navigation() {
             </Link>
           </li>
         )}
-        <li>
+        {/* <li>
           <Link href='/team/members'>
             <a className={router.pathname == '/team/members' ? 'Active' : ''}>
               Members
             </a>
           </Link>
-        </li>
-        <li>
-          <Link href='/team/map' className='myClass'>
-            Map
-          </Link>
-        </li>
+        </li> */}
         <li>
           <h4>Me Time</h4>
         </li>
