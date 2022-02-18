@@ -19,8 +19,28 @@ export default function TeamEdit() {
     hero_image: '',
     custom_prompt: '',
     collab_prompt: '',
+    link: '',
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
+  // const [inviteLink, setInviteLink] = useState('');
+
+  // // Make invite link
+  // // TODO: build this on Django model and add "safety" string.
+  // useEffect(() => {
+  //   let isMounted = true;
+  // // Keep from running server-side
+  // if (!makingNewTeam && typeof window !== 'undefined') {
+  //   // Make invite link
+  //   if (isMounted)
+  //     setInviteLink(
+  //       `${window.location.origin}/?signUp&invite=${formFields.id}`
+  //     );
+  // }
+  //   return () => {
+  //     isMounted = false;
+  //   };
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [formFields]);
 
   useEffect(() => {
     let isMounted = true;
@@ -96,6 +116,19 @@ export default function TeamEdit() {
     }
   }
 
+  // Indicate that url was copied to clipboard
+  const [copied, setCopied] = useState(false);
+  function handleCopyLink() {
+    // Keep from running server-side
+    if (!makingNewTeam && typeof window !== 'undefined') {
+      // Make invite link
+      // This works in iOS on an https connection
+      navigator.clipboard
+        .writeText(`${window.location.origin}/?signUp&invite=${formFields.id}`)
+        .then(() => setCopied(true));
+    }
+  }
+
   if (!user) {
     return <p>Loading user session...</p>;
   }
@@ -139,6 +172,7 @@ export default function TeamEdit() {
             value={formFields.custom_prompt}
             onChange={handleChange}
             maxLength='150'
+            required
           />
           <label htmlFor='collab_prompt'>collab prompt:</label>
           <input
@@ -148,20 +182,37 @@ export default function TeamEdit() {
             value={formFields.collab_prompt}
             onChange={handleChange}
             maxLength='150'
+            required
           />
-          <label htmlFor='hero_image'>image:</label>
+          {/* <label htmlFor='hero_image'>image:</label>
           <input
             type='file'
             id='hero_image'
             name='hero_image'
             accept='image/png, image/jpeg'
             onChange={handleChange}
-          />
+          /> */}
           {/* TODO: required_fields Add set of checkboxes to make member fields required */}
-          {/* TODO: link Add field for custom link option */}
-          <button type='submit' className='col-span-2'>
-            {makingNewTeam ? 'Go Team!' : 'Save'}
-          </button>
+          {/* {!makingNewTeam && (
+            <>
+              <label htmlFor='link'>invite link:</label>
+              <input
+                type='text'
+                id='link'
+                name='link'
+                value={inviteLink}
+                // onChange={handleChange}
+                // maxLength='150'
+                readOnly
+              />
+            </>
+          )} */}
+          {!makingNewTeam && (
+            <button type='button' onClick={handleCopyLink}>
+              {copied ? 'Copied!' : 'Copy Invite Link'}
+            </button>
+          )}
+          <button type='submit'>{makingNewTeam ? 'Go Team!' : 'Save'}</button>
         </form>
       </div>
     </>
