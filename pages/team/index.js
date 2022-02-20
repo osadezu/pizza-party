@@ -15,7 +15,7 @@ export default function Team() {
   useEffect(() => {
     let isMounted = true;
 
-    if (!user || !user?.isLoggedIn) {
+    if (!user || !user?.team) {
       return; // Wait for session info
     }
 

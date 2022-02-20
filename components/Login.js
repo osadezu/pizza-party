@@ -63,7 +63,7 @@ export default function Signup() {
       }
     } catch (err) {
       // TODO: Handle error
-      console.error(err.response.data);
+      console.error(err);
     }
   }
 
