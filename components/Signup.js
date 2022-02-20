@@ -71,7 +71,7 @@ export default function Signup({ hasInvite }) {
       }
     } catch (error) {
       // TODO: Handle error
-      console.error(error.response.data);
+      console.error(error);
     }
   }
 
@@ -93,7 +93,7 @@ export default function Signup({ hasInvite }) {
       }
     } catch (error) {
       // TODO: Handle error
-      console.error(error.response.data);
+      console.error(error);
     }
   }
 
