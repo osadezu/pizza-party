@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Virgil';
+  src: url('https://excalidraw.com/Virgil.woff2');
+}
+/* @font-face {
+  font-family: 'Cascadia';
+  src: url('https://excalidraw.com/Cascadia.woff2');
+} */
+
 #app-wrapper {
   width: 100vw;
   height: 100vh;
@@ -235,10 +244,16 @@ main > div {
   line-height: 1.1;
   font-size: initial;
 }
-
 .member-card a:hover {
   text-decoration: tomato wavy underline;
 }
+
+/*
+Sketchy styles for member cards based on bits and pieces of these examples
+https://codepen.io/tmrDevelops/pen/VeRvKX
+https://codepen.io/piccalilli/pen/MPLzay
+https://codepen.io/mp/pen/kBEeKw
+*/
 
 .collab-entry {
   padding: 0.15rem 0.5rem;
