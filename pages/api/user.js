@@ -7,27 +7,42 @@ axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 // https://github.com/vvo/iron-session
 
 export default withSessionRoute(async (req, res) => {
-  // This endpoint returns the session.user object and sets isLoggedIn: true
+  // This endpoint provides global user session details and sets isLoggedIn: true
   if (req.session.user?.email && req.session.user?.auth_token) {
     let user = req.session.user;
 
-    // TODO: Simplify this logic by making django endpoints
-    // which cross - populate users, members and teams!!!
-    // Check if user is member
     try {
-      const resMembers = await axios({
+      const resUser = await axios({
         method: 'get',
-        url: 'members/',
+        url: 'users/me/',
         headers: {
           Authorization: `Token ${user.auth_token}`,
         },
       });
-      // console.log(resMembers.data);
-      if (resMembers.status === 200) {
-        const member = resMembers.data.find(
-          (member) => member.user === user.email
-        );
-        if (member) {
+      // console.log(resUser.data);
+      if (resUser.status === 200) {
+        // Get team and admin details
+        if (resUser.data.admin_teams.length) {
+          // User is admin
+          const admin_team = resUser.data.admin_teams[0];
+          user = {
+            ...user,
+            isAdmin: true,
+            team: admin_team.id,
+            teamName: admin_team.name,
+          };
+        } else if (resUser.data.team) {
+          // User has team but is not admin
+          user = {
+            ...user,
+            isAdmin: false,
+            teamName: resUser.data.team.name,
+          };
+        }
+
+        // Get member details
+        if (resUser.data.member) {
+          const member = resUser.data.member;
           user = {
             ...user,
             isMember: member.id,
@@ -36,42 +51,6 @@ export default withSessionRoute(async (req, res) => {
           };
         } else {
           user = { ...user, isMember: false };
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-
-    const userTeam = user.team || user.hasInvite || false;
-
-    // Check if user owns a team
-    try {
-      const resTeams = await axios({
-        method: 'get',
-        url: 'teams/',
-        headers: {
-          Authorization: `Token ${user.auth_token}`,
-        },
-      });
-      // console.log(resTeams.data);
-      if (resTeams.status === 200) {
-        // Check if user is admin
-        const team = resTeams.data.find((team) => team.admin === user.email);
-        if (team) {
-          user = {
-            ...user,
-            isAdmin: team.id,
-            teamName: team.name,
-          };
-        } else if (userTeam) {
-          // User is not admin
-          user = { ...user, isAdmin: false };
-
-          // get non-admin member's team
-          const team = resTeams.data.find((team) => team.id === userTeam);
-          if (team) {
-            user = { ...user, teamName: team.name };
-          }
         }
       }
     } catch (error) {

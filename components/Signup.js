@@ -1,15 +1,13 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import useUser from '../lib/useUser';
-import user from '../pages/api/user';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Signup({ hasInvite }) {
   const { mutateUser } = useUser({
-    redirectTo: '/team/edit?newTeam',
+    redirectTo: '/team',
     redirectIfFound: true,
   });
 

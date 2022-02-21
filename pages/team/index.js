@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import axios from 'axios';
 
@@ -8,9 +9,9 @@ import MemberCard from '../../components/MemberCard';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Team() {
+  const router = useRouter();
   const { user } = useUser({ redirectTo: '/?login' });
-  const [team, setTeam] = useState({});
-  const [members, setMembers] = useState([]);
+  const [team, setTeam] = useState();
 
   useEffect(() => {
     let isMounted = true;
@@ -38,33 +39,26 @@ export default function Team() {
       }
     })();
 
-    // Get all members
-    // TODO: create Django endpoint for team with populated members to fetch everything in one call
-    (async () => {
-      try {
-        const response = await axios({
-          method: 'get',
-          url: `members/`,
-          headers: {
-            Authorization: `Token ${user.auth_token}`,
-          },
-        });
-        // console.log(response.data);
-        if (response.status === 200) {
-          if (isMounted)
-            setMembers(
-              response.data.filter((member) => member.team === team.id)
-            );
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-
     return () => {
       isMounted = false;
     };
-  }, [user]);
+  }, [user, user?.team]);
+
+  // Catch non-member user
+  if (user && user.isLoggedIn && !user.isMember) {
+    if (user.hasInvite) {
+      // With invite, create member
+      router.replace('/member/edit?newMember');
+    } else if (!user.isAdmin) {
+      // No invite, admin of new team
+      router.replace('/team/edit?newTeam');
+    }
+  }
+
+  if (!team || !team.members) {
+    // Wait while loading team data
+    return null;
+  }
 
   return (
     <>
@@ -77,7 +71,7 @@ export default function Team() {
           <h3>{team.blurb}</h3>
           <h4>{team.collab_prompt}</h4>
           <div className='collab'>
-            {members.map((member, i) => (
+            {team.members.map((member, i) => (
               <div className='collab-entry messy' key={i}>
                 {member.collab_answer}
               </div>
@@ -85,7 +79,7 @@ export default function Team() {
           </div>
         </div>
         <div className='member-side'>
-          {members.map((member, i) => {
+          {team.members.map((member, i) => {
             return (
               <MemberCard
                 key={i}

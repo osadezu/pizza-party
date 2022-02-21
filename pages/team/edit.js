@@ -55,7 +55,7 @@ export default function TeamEdit() {
         try {
           const response = await axios({
             method: 'get',
-            url: `teams/${user.isAdmin}`,
+            url: `teams/${user.team}`,
             headers: {
               Authorization: `Token ${user.auth_token}`,
             },
@@ -92,7 +92,7 @@ export default function TeamEdit() {
     try {
       const res = await axios({
         method: makingNewTeam ? 'post' : 'put',
-        url: makingNewTeam ? 'teams/' : `teams/${user.isAdmin}`,
+        url: makingNewTeam ? 'teams/' : `teams/${user.team}`,
         data: data,
         headers: {
           'content-type': 'multipart/form-data',
@@ -103,7 +103,7 @@ export default function TeamEdit() {
       if (res.status === 201) {
         // Created
         // Manually update user session while backend returns
-        mutateUser({ ...user, isAdmin: res.data.id });
+        mutateUser({ ...user, isAdmin: true, team: res.data.id });
         router.push('/member/edit?newMember');
       } else if (res.status === 200) {
         // Updated
