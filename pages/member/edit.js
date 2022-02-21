@@ -39,7 +39,7 @@ export default function MemberEdit() {
       return; // Wait for session info
     }
 
-    const team = user?.isAdmin || user?.hasInvite || user?.team || false;
+    const team = user?.hasInvite || user?.team || false;
 
     if (team) {
       if (user.isMember) {
