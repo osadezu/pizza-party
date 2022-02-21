@@ -60,6 +60,7 @@ export default function Signup({ hasInvite }) {
       });
       // console.log(res);
       if (res.status === 200) {
+        // TODO: Add a step for user to confirm they mean to create a team instead of joining an existing one.
         // TODO: THIS INVITE LINK IMPLEMENTATION IS NOT SECURE!
         // Link must contain a randomized key and the validity must be verified in the backend.
         handleLogin({

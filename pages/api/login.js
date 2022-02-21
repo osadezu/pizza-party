@@ -7,11 +7,23 @@ export default withSessionRoute(async (req, res) => {
   // This endpoint saves the login req body (user email, auth token) in a session cookie
 
   // TODO: Move actual api auth_token request here?
+  const { email, auth_token } = await req.body;
 
-  const user = { ...req.body, isLoggedIn: true };
-  req.session.user = user;
-  await req.session.save();
-  console.log('Saved session:', req.session);
+  try {
+    const user = {
+      email: email,
+      auth_token: auth_token,
+      isLoggedIn: true,
+    };
 
-  res.json(user);
+    req.session.user = user;
+
+    await req.session.save();
+    console.log('Saved login session:', req.session);
+
+    // Send response with logged in user
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
