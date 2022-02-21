@@ -206,7 +206,7 @@ main > div {
 .member-card h4 {
   font-family: Virgil, Caveat, cursive;
   font-size: xx-large;
-  white-space: nowrap;
+  /* white-space: nowrap; */
 }
 .member-card .sec-name {
   font-size: x-large;
