@@ -22,9 +22,11 @@ A fast and easy way for new remote teams to break the zoom ice. Through a shared
   - https://codepen.io/mp/pen/kBEeKw
 - Huge shout-out to [Excalidraw](https://excalidraw.com/#json=RK85fN9wlf43MLqPG5Nx7,TRVcMeBK_V8_pC90jWjGiQ) for their amazing, free app. 
 
-<!-- ## App Screenshot -->
+## App Screenshot
 
-### pizza-party-api
+<img width="1206" alt="image" src="https://user-images.githubusercontent.com/24361930/155178316-d1f92adb-c5ec-4bd4-8200-e997a495fe9c.png">
+
+## pizza-party-api
 
 Visit the [API repo](https://github.com/osadezu/pizza-party-api/).
 
