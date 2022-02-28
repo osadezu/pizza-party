@@ -139,6 +139,11 @@ export default function MemberEdit() {
     }
   }
 
+  // Catch new admin-to-be with no team
+  if (user && user.isLoggedIn && !user.hasInvite && !user.team) {
+    router.replace('/team/edit?newTeam');
+  }
+
   if (!user || !teamData) {
     return <p>Loading user session...</p>;
   }
