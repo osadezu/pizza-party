@@ -151,7 +151,7 @@ export default function MemberEdit() {
   return (
     <>
       <Head>
-        <title>PizzaParty - Edit Team Member</title>
+        <title>PizzaParty - Edit Member Profile</title>
       </Head>
       <div className='main-wrapper'>
         <div>

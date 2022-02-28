@@ -45,7 +45,7 @@ export default function Team() {
   }, [user, user?.team]);
 
   // Catch non-member user
-  if (user && user.isLoggedIn && !user.isMember) {
+  if (user && user.isMember == false) {
     if (user.hasInvite) {
       // With invite, create member
       router.replace('/member/edit?newMember');

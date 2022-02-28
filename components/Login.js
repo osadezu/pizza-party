@@ -7,8 +7,7 @@ import useUser from '../lib/useUser';
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Signup() {
-  const router = useRouter();
-  const { user, mutateUser } = useUser({
+  const { mutateUser } = useUser({
     redirectTo: '/team',
     redirectIfFound: true,
   });
