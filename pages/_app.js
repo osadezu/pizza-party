@@ -5,7 +5,6 @@ import axios from 'axios';
 import Layout from '../components/Layout';
 
 import '../styles/normalize.css';
-import '../styles/bootswatch-sketchy.css';
 import '../styles/globals.css';
 import '../styles/layout.css';
 

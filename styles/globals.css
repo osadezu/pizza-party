@@ -7,6 +7,20 @@
   src: url('https://excalidraw.com/Cascadia.woff2');
 } */
 
+:root {
+  /* Fonts */
+  --font-sans-serif: Neucha, -apple-system, system-ui, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+  --font-headers: 'Cabin Sketch', cursive;
+  --body-font: var(--font-sans-serif);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   padding: 0;
@@ -15,6 +29,24 @@ body {
 
 body {
   font-size: 18px;
+  font-family: var(--body-font);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-headers);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.65em;
 }
 
 p {
@@ -24,6 +56,7 @@ p {
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 a:hover {
   text-decoration: tomato wavy underline;
@@ -32,10 +65,34 @@ a.Active {
   text-shadow: 0 0.4em 0.8em tomato;
 }
 
-* {
-  box-sizing: border-box;
+input,
+button,
+textarea {
+  margin: 0;
+}
+/* label {
+  margin-bottom: 0.25em;
+} */
+
+input,
+textarea {
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  border-radius: 50px 15px 15px 15px / 10px 75px 25px 45px;
+  line-height: 1.5;
+}
+input[type='file'] {
+  margin-right: 0.35em;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-button {
-  margin: 0.15rem 0.5rem;
+button,
+input[type='file']::file-selector-button {
+  border-radius: 50px 15px 15px 15px / 10px 75px 45px 25px;
+  font-size: inherit;
+  line-height: 1.5;
+}
+button:not(:disabled) {
+  cursor: pointer;
 }
