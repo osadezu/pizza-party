@@ -1,0 +1,78 @@
+<svg version="1.1"
+  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 150" width="480" height="300">
+  <!-- svg-source:excalidraw -->
+
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="240" height="150" fill="#ffffff"></rect>
+  <g stroke-linecap="round" transform="translate(10 10) rotate(0 110.00000000000001 65.2337646484375)">
+    <path d="M2.01 0.72 C46.71 2.7, 87.4 3.23, 219.36 -3.27 M0.44 -1.15 C84.17 -2.18, 167.93 -4.33, 220.18 -0.32 M217.6 -3.22 C226.58 43.72, 225.47 88.41, 218.61 128.57 M218.47 -0.37 C220.19 40.22, 220.4 85.75, 219.07 130.2 M218.15 130.07 C153.98 133.17, 81.52 129.84, -1.17 132.04 M220.84 129.69 C160.79 132.82, 102.32 135.76, 0.33 130.4 M1.79 127.74 C5.41 90.21, -1.43 57.13, 0.6 -1.41 M-0.29 131.55 C2.46 89.33, 2.69 48.18, -1.5 1.72" stroke="#000000" stroke-width="1" fill="none"></path>
+  </g>
+  <g stroke-linecap="round">
+    <g transform="translate(56.918975830078125 14.662994384765625) rotate(0 0 58.99194335937501)">
+      <path d="M0 0 C0 19.66, 0 98.32, 0 117.98 M0 0 C0 19.66, 0 98.32, 0 117.98" stroke="#000000" stroke-width="1" fill="none"></path>
+    </g>
+  </g>
+  <g stroke-linecap="round">
+    <g transform="translate(112.53741455078128 14.662994384765625) rotate(0 0 58.99194335937501)">
+      <path d="M0 0 C0 19.66, 0 98.32, 0 117.98 M0 0 C0 19.66, 0 98.32, 0 117.98" stroke="#000000" stroke-width="1" fill="none"></path>
+    </g>
+  </g>
+  <g stroke-linecap="round">
+    <g transform="translate(170.2791442871094 14.662994384765625) rotate(0 0 58.99194335937501)">
+      <path d="M0 0 C0 19.66, 0 98.32, 0 117.98 M0 0 C0 19.66, 0 98.32, 0 117.98" stroke="#000000" stroke-width="1" fill="none"></path>
+    </g>
+  </g>
+  <g stroke-linecap="round">
+    <g transform="translate(13.9078369140625 55.266815185546875) rotate(0 105.40167236328126 0)">
+      <path d="M0 0 C35.13 0, 175.67 0, 210.8 0 M0 0 C35.13 0, 175.67 0, 210.8 0" stroke="#000000" stroke-width="1" fill="none"></path>
+    </g>
+  </g>
+  <g stroke-linecap="round">
+    <g transform="translate(14.2564697265625 100.44049072265625) rotate(0 105.40167236328126 0)">
+      <path d="M0 0 C35.13 0, 175.67 0, 210.8 0 M0 0 C35.13 0, 175.67 0, 210.8 0" stroke="#000000" stroke-width="1" fill="none"></path>
+    </g>
+  </g>
+  <g transform="translate(77.27838134765628 66.32102966308594) rotate(89.99999999999994 7 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:(</text>
+  </g>
+  <g transform="translate(131.8265075683594 22.81109619140625) rotate(89.99999999999994 8 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:\</text>
+  </g>
+  <g transform="translate(192.6137390136719 106.514892578125) rotate(89.99999999999994 8 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:\</text>
+  </g>
+  <g transform="translate(66.91864013671878 20.773345947265625) rotate(0 16 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">ô.O</text>
+  </g>
+  <g transform="translate(130.03625488281253 107.9951171875) rotate(270 11 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">$:</text>
+  </g>
+  <g transform="translate(132.37695312500003 66.44674682617188) rotate(89.99999999999994 8.5 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:o</text>
+  </g>
+  <g transform="translate(26.4322509765625 20.957122802734375) rotate(89.99999999999994 8.5 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:-|</text>
+  </g>
+  <g transform="translate(26.4322509765625 107.61810302734375) rotate(89.99999999999994 8.5 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:-|</text>
+  </g>
+  <g transform="translate(186.32498168945315 67.82229614257812) rotate(89.99999999999994 9.5 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:P</text>
+  </g>
+  <g transform="translate(69.70397949218753 106.8802490234375) rotate(0 14 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">&gt;.&lt;</text>
+  </g>
+  <g transform="translate(185.3011169433594 22.089889526367188) rotate(0 14 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">&gt;.&lt;</text>
+  </g>
+  <g transform="translate(27.4906005859375 66.44674682617188) rotate(89.99999999999994 8.5 12.5)">
+    <text x="0" y="18" font-family="Virgil, Segoe UI Emoji" font-size="20px" fill="#000000" text-anchor="start" style="white-space: pre;" direction="ltr">:o</text>
+  </g>
+</svg>

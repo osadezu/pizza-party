@@ -4,27 +4,42 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
 }
 
 #header-wrapper {
   width: 100%;
-  padding: 0 3rem;
-  position: sticky;
-  top: 0;
+  padding: 0 var(--main-margin);
+  position: relative;
   display: flex;
   justify-content: space-between;
-  justify-items: flex-end;
-  align-items: flex-end;
+  background-color: var(--body-bg);
+  /* justify-items: flex-end; */
+  /* align-items: flex-end; */
 }
 .header-controls {
   text-align: right;
 }
 h1.app-title {
-  font-family: Virgil, Caveat, cursive;
+  position: relative;
+  z-index: 20;
+  font-family: var(--font-handwriting);
   font-size: 3.5rem;
   margin-bottom: -0.5rem;
   margin-top: 2.25rem;
+}
+#header-wrapper::after {
+  content: '';
+  height: var(--main-margin);
+  width: 100%;
+  position: absolute;
+  z-index: 10;
+  bottom: calc(-1 * var(--main-margin));
+  left: 0;
+  background: linear-gradient(var(--body-bg), 75%, transparent);
+  pointer-events: none;
 }
 
 #navigation {
@@ -58,71 +73,92 @@ main {
   display: contents;
 }
 
-main > div {
-  height: 100%;
-  margin: 2rem auto;
+.main-wrapper {
+  width: 100%;
+  padding: var(--main-margin);
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: minmax(300px, 400px) fit-content(50vw);
+  grid-template-rows: 1fr 1fr;
+  grid-auto-flow: column;
+  /* grid-template-areas:
+    'tl tr'
+    'bl br'; */
+  column-gap: var(--main-margin);
+  row-gap: var(--section-padding);
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
 }
 
-.index-wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(min-content, 1fr));
-  grid-template-rows: 50% 50%;
-  grid-template-areas:
-    'l tr'
-    'l br';
-  column-gap: 4rem;
-  row-gap: 1rem;
+.index-block {
+  font-size: larger;
+  line-height: 1.5;
 }
-.index-left {
-  grid-area: l;
+.index .to-bottom {
+  align-self: flex-end;
+}
+.index .to-top {
+  align-self: flex-start;
+}
+.index-block svg {
+  width: 100%;
+  height: auto;
+}
+.index h3 {
+  white-space: nowrap;
+}
+.index blockquote {
+  text-align: end;
+}
+.index blockquote p {
+  font-family: var(--font-handwriting);
+}
+.index blockquote p::before {
+  content: '“';
+  font-size: larger;
+  margin-left: calc(-2 * var(--inline-spacing));
+  margin-right: var(--inline-spacing);
+}
+.index blockquote p::after {
+  content: '”';
+  font-size: larger;
+  margin-left: var(--inline-spacing);
+  margin-right: calc(-2 * var(--inline-spacing));
+}
+.index figcaption::before {
+  content: '~';
+  margin-right: var(--inline-spacing);
+}
+
+.index-block.login {
+  /* justify-self: center; */
+  padding: 0 20%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-.index-left p {
-  font-size: 1.2em;
-  margin: 0;
-}
-.index-right {
-  grid-area: br;
-  display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: flex-start;
+  gap: var(--section-padding);
 }
-
 .login-message {
-  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
+  /* white-space: nowrap; */
+  /* text-align: center; */
+}
+.login-message span {
+  white-space: nowrap;
+  font-family: var(--font-handwriting);
+  /* text-decoration: red underline wavy; */
 }
 .login-form {
-  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  gap: 0.75rem;
-}
-.login-form > label {
-  margin-bottom: -0.5rem;
 }
 
-.main-wrapper {
-  max-height: 90vh;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(content, 1fr));
-  grid-template-rows: auto auto;
-  grid-auto-flow: column;
-  grid-template-areas:
-    'l r'
-    'l r';
-  column-gap: 4rem;
-  row-gap: 1rem;
-}
 .details-form {
   grid-area: r;
   width: 40vw;
@@ -206,7 +242,6 @@ main > div {
 .member-card h4 {
   font-family: Virgil, Caveat, cursive;
   font-size: xx-large;
-  /* white-space: nowrap; */
 }
 .member-card .sec-name {
   font-size: x-large;

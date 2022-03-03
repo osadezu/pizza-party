@@ -13,8 +13,19 @@
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
+  --font-handwriting: Virgil, Caveat, cursive;
   --font-headers: 'Cabin Sketch', cursive;
   --body-font: var(--font-sans-serif);
+
+  /* Colors */
+  --body-bg: white;
+  --text-lowlight: gray;
+
+  /* Spacing */
+  --main-margin: 3rem;
+  --section-padding: 1rem;
+  --section-gap: 0.75rem;
+  --inline-spacing: 0.35rem;
 }
 
 * {
@@ -39,7 +50,7 @@ h4,
 h5,
 h6 {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--section-padding);
   font-family: var(--font-headers);
   font-weight: 500;
   line-height: 1.2;
@@ -65,24 +76,37 @@ a.Active {
   text-shadow: 0 0.4em 0.8em tomato;
 }
 
+form {
+  /* gap: var(--section-gap); */
+}
+
+form label {
+  /* margin-bottom: calc(-1 * var(--section-gap)); */
+  font-family: var(--font-monospace);
+  font-size: initial;
+  color: var(--text-lowlight);
+}
+
 input,
 button,
 textarea {
   margin: 0;
+  margin-bottom: var(--section-gap);
 }
-/* label {
-  margin-bottom: 0.25em;
-} */
+
+p > button {
+  margin: 0 var(--inline-spacing);
+}
 
 input,
 textarea {
-  padding-left: 0.3em;
-  padding-right: 0.3em;
+  padding-left: var(--inline-spacing);
+  padding-right: var(--inline-spacing);
   border-radius: 50px 15px 15px 15px / 10px 75px 25px 45px;
   line-height: 1.5;
 }
 input[type='file'] {
-  margin-right: 0.35em;
+  margin-right: var(--inline-spacing);
   padding-left: 0;
   padding-right: 0;
 }

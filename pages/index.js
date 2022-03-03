@@ -6,9 +6,8 @@ import Image from 'next/image';
 import Signup from '../components/Signup.js';
 import Login from '../components/Login.js';
 
-import SvgGrid from '../public/images/team-grid.svg';
-import SvgYay from '../public/images/team-yay.svg';
-import SvgTxt from '../public/images/text-holder.svg';
+import SvgTeamGrid from '../assets/team-grid.svg';
+import SvgYay from '../assets/team-yay.svg';
 
 export default function Home() {
   const router = useRouter();
@@ -39,23 +38,37 @@ export default function Home() {
       <Head>
         <title>PizzaParty</title>
       </Head>
-      <div className='index-wrapper'>
-        <div className='index-left'>
+      <div className='main-wrapper index'>
+        <div className='index-block to-bottom'>
           <p>Go from this...</p>
-          <SvgGrid />
+          <SvgTeamGrid />
+        </div>
+        <div className='index-block to-top'>
           <p>... to this!</p>
           <SvgYay />
-          <p>In minutes!</p>
         </div>
-        <SvgTxt />
-        <div className='index-right'>
+        <div className='index-block'>
+          <h3>What our cats are saying:</h3>
+          <blockquote>
+            <p>Finally a page that puts the I in Team!</p>
+            <figcaption>Mittens from H.R.</figcaption>
+          </blockquote>
+          <blockquote>
+            <p>PizzaParty really gets the human into the screen name.</p>
+            <figcaption>Dr. Fluff</figcaption>
+          </blockquote>
+        </div>
+        <div className='index-block login to-top'>
           <div className='login-message'>
             {doLogin ? (
               <>
                 <p>Welcome back!</p>
                 <p>
                   New user?
-                  <button type='button' onClick={() => setDoLogin(!doLogin)}>
+                  <button
+                    type='button'
+                    onClick={() => setDoLogin(!doLogin)}
+                    className='button-inline'>
                     Sign Up
                   </button>
                 </p>
@@ -63,16 +76,26 @@ export default function Home() {
             ) : (
               <>
                 <p>
-                  {hasInvite
-                    ? `You were invited to join ${
-                        hasInvite.teamName + ' !' ?? 'a team!'
-                      }`
-                    : 'Sign up to build your team!'}
+                  {hasInvite ? (
+                    <>
+                      {'You were invited to join '}
+                      {hasInvite.teamName ? (
+                        <span>{hasInvite.teamName + '!'}</span>
+                      ) : (
+                        'a team!'
+                      )}
+                    </>
+                  ) : (
+                    'Sign up to build your team!'
+                  )}
                 </p>
                 {!hasInvite && (
                   <p>
                     Existing user?
-                    <button type='button' onClick={() => setDoLogin(!doLogin)}>
+                    <button
+                      type='button'
+                      onClick={() => setDoLogin(!doLogin)}
+                      className='button-inline'>
                       Log In
                     </button>
                   </p>

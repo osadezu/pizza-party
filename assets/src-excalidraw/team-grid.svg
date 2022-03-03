@@ -8,10 +8,6 @@
         font-family: "Virgil";
         src: url("https://excalidraw.com/Virgil.woff2");
       }
-      @font-face {
-        font-family: "Cascadia";
-        src: url("https://excalidraw.com/Cascadia.woff2");
-      }
     </style>
   </defs>
   <rect x="0" y="0" width="240.00000000000003" height="150.467529296875" fill="#ffffff"></rect>
