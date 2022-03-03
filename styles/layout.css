@@ -11,24 +11,23 @@
 
 #header-wrapper {
   width: 100%;
-  padding: 0 var(--main-margin);
+  padding: var(--section-padding) var(--main-margin) 0;
   position: relative;
   display: flex;
   justify-content: space-between;
   background-color: var(--body-bg);
-  /* justify-items: flex-end; */
-  /* align-items: flex-end; */
 }
 .header-controls {
   text-align: right;
+  line-height: 1.5;
 }
 h1.app-title {
+  margin: 0;
   position: relative;
+  top: var(--section-padding);
   z-index: 20;
   font-family: var(--font-handwriting);
   font-size: 3.5rem;
-  margin-bottom: -0.5rem;
-  margin-top: 2.25rem;
 }
 #header-wrapper::after {
   content: '';
@@ -43,29 +42,26 @@ h1.app-title {
 }
 
 #navigation {
+  width: min-content;
   position: fixed;
-  width: content;
-  top: 8rem;
+  top: 15vh;
   right: 0;
-  padding-right: 3rem;
-}
-#navigation ul {
-  padding: 0;
-  list-style-type: none;
-}
-#navigation h3 {
-  margin-top: 2.5rem;
-  margin-bottom: -0.5rem;
-}
-#navigation li {
+  z-index: 30;
+  padding-right: var(--main-margin);
   text-align: right;
-  margin-bottom: 1.2rem;
-  line-height: 0.9;
+  white-space: nowrap;
+  /* background-color: var(--body-bg);
+  border: solid 1px red; */
+}
+#navigation li:not(:first-child) h3 {
+  margin-top: calc(2 * var(--section-padding));
 }
 #navigation .link {
-  margin-right: 1.25rem;
+  margin-right: var(--section-padding);
+  margin-bottom: var(--section-gap);
 }
 #navigation li > span {
+  display: block;
   font-size: small;
 }
 
@@ -78,28 +74,28 @@ main {
   padding: var(--main-margin);
   flex-grow: 1;
   display: grid;
-  grid-template-columns: minmax(300px, 400px) fit-content(50vw);
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(2, fit-content(40vw));
   grid-auto-flow: column;
-  /* grid-template-areas:
-    'tl tr'
-    'bl br'; */
   column-gap: var(--main-margin);
   row-gap: var(--section-padding);
   justify-content: center;
   align-items: center;
   overflow-y: auto;
 }
+.main-wrapper .to-bottom {
+  align-self: flex-end;
+}
+.main-wrapper .to-top {
+  align-self: flex-start;
+}
 
+.main-wrapper.index {
+  grid-template-columns: minmax(300px, 400px) fit-content(50vw);
+  grid-template-rows: 1fr 1fr;
+}
 .index-block {
   font-size: larger;
   line-height: 1.5;
-}
-.index .to-bottom {
-  align-self: flex-end;
-}
-.index .to-top {
-  align-self: flex-start;
 }
 .index-block svg {
   width: 100%;
@@ -132,7 +128,6 @@ main {
 }
 
 .index-block.login {
-  /* justify-self: center; */
   padding: 0 20%;
   display: flex;
   flex-direction: column;
@@ -144,13 +139,10 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  /* white-space: nowrap; */
-  /* text-align: center; */
 }
 .login-message span {
   white-space: nowrap;
   font-family: var(--font-handwriting);
-  /* text-decoration: red underline wavy; */
 }
 .login-form {
   display: flex;
@@ -179,11 +171,13 @@ main {
 }
 
 .team-side {
-  padding-top: 5rem;
-  max-width: 30vw;
-  grid-area: l;
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
+}
+.team-side h2 {
+  white-space: nowrap;
 }
 .team-side h2,
 .team-side h3,
@@ -195,20 +189,31 @@ main {
   font-size: large;
 }
 .team-side h4 {
-  margin-top: 1rem;
   font-size: larger;
   font-family: Virgil, Caveat, cursive;
 }
 .member-side {
-  max-width: 30vw;
-  grid-area: r;
-  /* overflow-y: scroll; */
 }
 .collab {
+  padding: var(--section-padding);
   display: flex;
   flex-flow: row wrap;
-  gap: 0.5rem;
+  gap: var(--section-gap);
 }
+.collab-entry {
+  padding: 0.15rem 0.5rem;
+  position: relative;
+  font-size: smaller;
+  border: solid 2px #41403e;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  border-bottom-right-radius: 225px 15px;
+  border-bottom-left-radius: 15px 255px;
+}
+.collab-entry:hover {
+  box-shadow: 0.2rem 0.8rem 0.4rem -0.6rem hsla(0, 0%, 0%, 0.3);
+}
+
 /* .collab-entry {
   padding: 0 0.5rem;
   border: 2px solid #333333;
@@ -281,23 +286,6 @@ https://codepen.io/piccalilli/pen/MPLzay
 https://codepen.io/mp/pen/kBEeKw
 */
 
-.collab-entry {
-  padding: 0.15rem 0.5rem;
-  margin: 0 0.2rem;
-  position: relative;
-  font-size: smaller;
-  border-top-left-radius: 255px 15px;
-  border-top-right-radius: 15px 225px;
-  border-bottom-right-radius: 225px 15px;
-  border-bottom-left-radius: 15px 255px;
-}
-.collab-entry {
-  border: solid 2px #41403e;
-}
-.collab-entry:hover {
-  box-shadow: 0.2rem 0.8rem 0.4rem -0.6rem hsla(0, 0%, 0%, 0.3);
-}
-
 .sketchy {
   border: solid black;
   border-color: black;
@@ -307,10 +295,10 @@ https://codepen.io/mp/pen/kBEeKw
   border-width: 3px 4px 3px 5px;
   border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
 }
-.sketchy:nth-child(even) {
+.member-card.sketchy:nth-child(even) {
   transform: rotate(-2deg);
 }
-.sketchy:nth-child(odd) {
+.member-card.sketchy:nth-child(odd) {
   transform: rotate(1deg);
 }
 .sketchy:hover {

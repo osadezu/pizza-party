@@ -66,11 +66,11 @@ export default function Team() {
         <title>PizzaParty - Your Team</title>
       </Head>
       <div className='main-wrapper'>
-        <div className='team-side'>
+        <div className='team-side to-top'>
           <h2>{team.name}</h2>
           <h3>{team.blurb}</h3>
-          <h4>{team.collab_prompt}</h4>
-          <div className='collab'>
+          <div className='collab sketchy'>
+            <h4>{team.collab_prompt}</h4>
             {team.members.map((member, i) => (
               <div className='collab-entry messy' key={i}>
                 {member.collab_answer}

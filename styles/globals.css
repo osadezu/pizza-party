@@ -64,31 +64,33 @@ p {
   margin: 0;
 }
 
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
   cursor: pointer;
 }
 a:hover {
-  text-decoration: tomato wavy underline;
-}
-a.Active {
   text-shadow: 0 0.4em 0.8em tomato;
 }
-
-form {
-  /* gap: var(--section-gap); */
+a.active {
+  text-decoration: tomato wavy underline;
+  text-underline-offset: 0.15rem;
 }
 
 form label {
   /* margin-bottom: calc(-1 * var(--section-gap)); */
   font-family: var(--font-monospace);
-  font-size: initial;
+  font-size: smaller;
   color: var(--text-lowlight);
 }
 
 input,
-button,
+button:not(:last-child),
 textarea {
   margin: 0;
   margin-bottom: var(--section-gap);

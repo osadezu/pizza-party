@@ -22,7 +22,7 @@ export default function Navigation() {
         </li>
         <li className='link'>
           <Link href='/team'>
-            <a className={router.pathname == '/team' ? 'Active' : null}>
+            <a className={router.pathname == '/team' ? 'active' : null}>
               Rumpus
             </a>
           </Link>
@@ -34,7 +34,7 @@ export default function Navigation() {
         {user?.isAdmin && (
           <li className='link'>
             <Link href='/team/edit'>
-              <a className={router.pathname == '/team/edit' ? 'Active' : ''}>
+              <a className={router.pathname == '/team/edit' ? 'active' : ''}>
                 Edit Team
               </a>
             </Link>
@@ -42,7 +42,7 @@ export default function Navigation() {
         )}
         {/* <li>
           <Link href='/team/members'>
-            <a className={router.pathname == '/team/members' ? 'Active' : ''}>
+            <a className={router.pathname == '/team/members' ? 'active' : ''}>
               Members
             </a>
           </Link>
@@ -52,8 +52,8 @@ export default function Navigation() {
         </li>
         <li className='link'>
           <Link href='/member/edit'>
-            <a className={router.pathname == '/member/edit' ? 'Active' : ''}>
-              Member Profile
+            <a className={router.pathname == '/member/edit' ? 'active' : ''}>
+              Profile
             </a>
           </Link>
         </li>

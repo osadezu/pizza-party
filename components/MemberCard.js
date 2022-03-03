@@ -52,7 +52,7 @@ export default function MemberCard({ member, custPrompt }) {
         {member.link && (
           <>
             <span>🔗</span>
-            <Link href={member.link}>{member.link}</Link>
+            <a href={'//' + member.link}>{member.link}</a>
           </>
         )}
       </div>
