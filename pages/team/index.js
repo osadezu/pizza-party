@@ -69,7 +69,7 @@ export default function Team() {
         <div className='team-side to-top'>
           <h2>{team.name}</h2>
           <h3>{team.blurb}</h3>
-          <div className='collab sketchy'>
+          <div className='collab'>
             <h4>{team.collab_prompt}</h4>
             {team.members.map((member, i) => (
               <div className='collab-entry messy' key={i}>

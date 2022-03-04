@@ -215,10 +215,16 @@ main {
 }
 
 .team-side {
+  padding: var(--section-padding);
   display: flex;
   flex-direction: column;
   position: sticky;
   top: 0;
+  border: double 6px hsl(33, 14%, 50%);
+  /* border-radius: 5px; */
+  background-color: #cdb699;
+  box-shadow: 0.65rem 0.65rem inset hsl(33, 34%, 35%),
+    -0.1rem -0.1rem 0.75rem inset hsl(33, 54%, 15%);
 }
 .team-side h2 {
   white-space: nowrap;
@@ -243,11 +249,16 @@ main {
   display: flex;
   flex-flow: row wrap;
   gap: var(--section-gap);
+  background-color: white;
+  transform: rotate(0.75deg);
+  box-shadow: 0.1rem 0.1rem 0.5rem black;
 }
 .collab-entry {
-  padding: 0.15rem 0.5rem;
-  position: relative;
+  max-width: 80%;
+  padding: 0.3rem 0.5rem 0.15rem;
   font-size: smaller;
+  transform-box: border-box;
+  transform: translateX(10%);
 }
 .collab-entry:hover {
   box-shadow: 0.2rem 0.8rem 0.4rem -0.6rem hsla(0, 0%, 0%, 0.3);
@@ -310,6 +321,13 @@ https://codepen.io/mp/pen/kBEeKw
 .messy {
   border: solid 2px #41403e;
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 225px;
+  /* Fix jagged edges in Chrome */
+  backface-visibility: hidden;
+  /* Check if below is needed when testing other browsers
+  https://stackoverflow.com/questions/6492027/css-transform-jagged-edges-in-chrome
+   */
+  /* -webkit-background-clip: content-box;
+  background-clip: content-box; */
 }
 
 .sketchy {
