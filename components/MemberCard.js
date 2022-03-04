@@ -2,17 +2,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function MemberCard({ member, custPrompt }) {
-  let screenName;
+  let screenName, secondaryName;
 
   if (member.goes_by) {
     screenName = member.goes_by;
-    const secondaryName = member.first_name + ' ' + member.last_name;
+    secondaryName = member.first_name + ' ' + member.last_name;
   } else {
     screenName = member.first_name + ' ' + member.last_name;
+    secondaryName = null;
   }
 
   return (
-    <div className='member-card sketchy'>
+    <div className='member-card messy'>
+      <div className='details'>
+        <h4>{screenName}</h4>
+        {/* {secondaryName && <p className='sec-name'>{secondaryName}</p>} */}
+        <p>
+          {member.pronouns && member.pronouns}
+          {member.pronouns && member.location && ' - '}
+          {member.location && member.location}
+        </p>
+      </div>
       {member.avatar && (
         <div className='avatar'>
           <Image
@@ -20,42 +30,10 @@ export default function MemberCard({ member, custPrompt }) {
             alt={`${screenName}'s avatar`}
             layout='fill'
             objectFit='contain'
+            className='avatar-img'
           />
         </div>
       )}
-      <div className='details'>
-        <h4 className='no-break'>{screenName}</h4>
-        {secondaryName && <p className='sec-name'>{secondaryName}</p>}
-        {member.pronouns && (
-          <p>
-            <span>pronouns</span>
-            {member.pronouns}
-          </p>
-        )}
-        {member.location && (
-          <p>
-            <span>location</span> {member.location}
-          </p>
-        )}
-        {member.interests && (
-          <p>
-            <span>interests</span>
-            {member.interests}
-          </p>
-        )}
-        {member.pets && (
-          <p>
-            <span>pets</span>
-            {member.pets}
-          </p>
-        )}
-        {member.link && (
-          <>
-            <span>🔗</span>
-            <a href={'//' + member.link}>{member.link}</a>
-          </>
-        )}
-      </div>
       {member.custom_answer && (
         <div className='answer'>
           <p className='prompt'>{custPrompt}</p>

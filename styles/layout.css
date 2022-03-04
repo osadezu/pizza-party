@@ -133,6 +133,10 @@ main {
   align-self: flex-start;
 }
 
+/*********************
+ * Site Index Styles *
+ *********************/
+
 .main-wrapper.index {
   grid-template-columns: minmax(300px, 400px) fit-content(50vw);
   grid-template-rows: 1fr 1fr;
@@ -207,11 +211,12 @@ main {
   margin-bottom: 0.75rem;
 }
 
-.profile-avatar {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  grid-area: avatar;
+/********************
+ * Team View Styles *
+ ********************/
+
+.main-wrapper.team {
+  grid-template-columns: fit-content(40vw) min-content;
 }
 
 .team-side {
@@ -255,6 +260,7 @@ main {
 }
 .collab-entry {
   max-width: 80%;
+  /* Padding to center theweird font vertically in box */
   padding: 0.3rem 0.5rem 0.15rem;
   font-size: smaller;
   transform-box: border-box;
@@ -265,60 +271,59 @@ main {
 }
 
 .member-card {
-  margin: 0.75rem;
-  padding: 1rem;
+  height: 100px;
+  box-sizing: content-box;
+  margin: var(--section-padding);
+  padding: var(--section-gap);
   display: grid;
-  grid-template-columns: auto 150px;
-  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 100px;
+  grid-template-rows: auto 1fr;
   grid-template-areas:
     'details avatar'
-    'answer answer';
-  gap: 1rem;
+    'answer avatar';
+  justify-content: space-between;
   font-size: smaller;
 }
 .member-card h4 {
-  font-family: Virgil, Caveat, cursive;
-  font-size: xx-large;
-}
-.member-card .sec-name {
-  font-size: x-large;
+  margin: 0;
+  font-size: 1.5rem;
+  font-family: var(--font-handwriting);
+  white-space: nowrap;
 }
 .member-card .avatar {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: 100px;
   grid-area: avatar;
-  /* object-fit: contain; */
+  position: relative;
 }
 .member-card .details {
   grid-area: details;
 }
-.member-card .answer {
-  grid-area: answer;
-  font-size: x-large;
-}
-.member-card span,
-.member-card .prompt {
-  margin-right: 0.75rem;
-  font-size: smaller;
-  color: silver;
-}
 .member-card p {
-  line-height: 1.1;
-  font-size: initial;
+  /* The largest of this member name <h4> determines the column width */
+  max-width: 15vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.member-card a:hover {
-  text-decoration: tomato wavy underline;
+.member-card .answer {
+  padding-left: var(--section-gap);
+  grid-area: answer;
+  align-self: flex-end;
+}
+.member-card .prompt {
+  font-size: 0.8rem;
+  color: var(--color-text-lowlight);
 }
 
 /*
-Sketchy styles for member cards based on bits and pieces of these examples
+Messy styles for member cards based on bits and pieces of these examples
 https://codepen.io/tmrDevelops/pen/VeRvKX
 https://codepen.io/piccalilli/pen/MPLzay
 https://codepen.io/mp/pen/kBEeKw
 */
 
-.messy {
+.sketchy {
   border: solid 2px #41403e;
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 225px;
   /* Fix jagged edges in Chrome */
@@ -330,32 +335,43 @@ https://codepen.io/mp/pen/kBEeKw
   background-clip: content-box; */
 }
 
-.sketchy {
+.messy {
   border: solid black;
   border-color: black;
   position: relative;
+  /* Fix jagged edges in Chrome */
+  backface-visibility: hidden;
+  /* Check if below is needed when testing other browsers
+  https://stackoverflow.com/questions/6492027/css-transform-jagged-edges-in-chrome
+   */
+  /* -webkit-background-clip: content-box;
+  background-clip: content-box; */
 }
-.sketchy {
+.messy {
   border-width: 3px 4px 3px 5px;
   border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
 }
-.member-card.sketchy:nth-child(even) {
-  transform: rotate(-2deg);
+.member-card.messy:nth-child(odd) {
+  transform: rotate(2deg) translateX(var(--section-padding));
 }
-.member-card.sketchy:nth-child(odd) {
-  transform: rotate(1deg);
+.member-card.messy:nth-child(even) {
+  transform: rotate(-1deg);
+  border-radius: 60% 14% 80% 5%/8% 5% 6% 50%;
 }
-.sketchy:hover {
+.member-card.messy:nth-child(3n) {
+  transform: rotate(2.5deg) translateX(var(--section-padding));
+}
+.messy:hover {
   box-shadow: 0.2rem 0.8rem 0.4rem -0.6rem hsla(0, 0%, 0%, 0.3);
 }
 
 /* 
-.sketchy {
+.messy {
   border: 2px solid #333333;
   border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
   position: relative;
 }
-.sketchy::before {
+.messy::before {
   border: 2px solid #353535;
   display: block;
   width: 100%;
