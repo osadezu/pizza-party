@@ -26,7 +26,7 @@ export default function Navigation() {
             type='button'
             className='menu-toggle'
             onClick={() => setShowMenu(!showMenu)}>
-            <h3>Menu</h3>
+            Menu
           </button>
           <SvgPizzaIcon onClick={() => setShowMenu(false)} />
         </div>
