@@ -13,7 +13,10 @@ export default function MemberCard({ member, custPrompt, setShowMember }) {
   }
 
   return (
-    <div className='member-card messy' onClick={() => setShowMember(member)}>
+    <div
+      className='member-card messy'
+      // onClick={() => setShowMember(member)}
+    >
       <div className='details'>
         <h4>{screenName}</h4>
         {/* {secondaryName && <p className='sec-name'>{secondaryName}</p>} */}
