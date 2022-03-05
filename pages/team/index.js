@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import useUser from '../../lib/useUser';
 import MemberCard from '../../components/MemberCard';
+import MemberModal from '../../components/MemberModal';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -12,6 +13,7 @@ export default function Team() {
   const router = useRouter();
   const { user } = useUser({ redirectTo: '/?login' });
   const [team, setTeam] = useState();
+  const [showMember, setShowMember] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -85,10 +87,24 @@ export default function Team() {
                 key={i}
                 member={member}
                 custPrompt={team.custom_prompt}
+                setShowMember={setShowMember}
               />
             );
           })}
         </div>
+      </div>
+      <div
+        id='member-backdrop'
+        className={showMember ? '' : 'hidden'}
+        onClick={() => setShowMember(false)}></div>
+      <div className='member-modal-wrapper'>
+        {showMember && (
+          <MemberModal
+            member={showMember}
+            custPrompt={team.custom_prompt}
+            setShowMember={setShowMember}
+          />
+        )}
       </div>
     </>
   );

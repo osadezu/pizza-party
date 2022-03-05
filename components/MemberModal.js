@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function MemberCard({ member, custPrompt }) {
+export default function MemberModal({ member, custPrompt }) {
   let screenName;
 
   if (member.goes_by) {
@@ -12,7 +12,7 @@ export default function MemberCard({ member, custPrompt }) {
   }
 
   return (
-    <div className='member-card messy'>
+    <div className='member-modal messy'>
       {member.avatar && (
         <div className='avatar'>
           <Image

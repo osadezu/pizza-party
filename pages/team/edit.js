@@ -147,8 +147,8 @@ export default function TeamEdit() {
       <Head>
         <title>PizzaParty - Edit Team</title>
       </Head>
-      <div className='main-wrapper'>
-        <h3>Enter your team details!</h3>
+      <div className='main-wrapper details'>
+        <h3 className='to-top'>Enter your team details!</h3>
 
         <form
           encType='multipart/form-data'

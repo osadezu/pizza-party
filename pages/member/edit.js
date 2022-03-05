@@ -153,8 +153,8 @@ export default function MemberEdit() {
       <Head>
         <title>PizzaParty - Edit Member Profile</title>
       </Head>
-      <div className='main-wrapper'>
-        <div>
+      <div className='main-wrapper details'>
+        <div className='to-top'>
           <h3>What&#39;s your slice?</h3>
           {user.avatar && (
             <div className='profile-avatar'>

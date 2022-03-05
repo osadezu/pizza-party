@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function MemberCard({ member, custPrompt }) {
+export default function MemberCard({ member, custPrompt, setShowMember }) {
   let screenName, secondaryName;
 
   if (member.goes_by) {
@@ -13,7 +13,7 @@ export default function MemberCard({ member, custPrompt }) {
   }
 
   return (
-    <div className='member-card messy'>
+    <div className='member-card messy' onClick={() => setShowMember(member)}>
       <div className='details'>
         <h4>{screenName}</h4>
         {/* {secondaryName && <p className='sec-name'>{secondaryName}</p>} */}
@@ -30,7 +30,6 @@ export default function MemberCard({ member, custPrompt }) {
             alt={`${screenName}'s avatar`}
             layout='fill'
             objectFit='contain'
-            className='avatar-img'
           />
         </div>
       )}

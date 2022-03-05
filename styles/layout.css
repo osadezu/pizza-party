@@ -25,7 +25,7 @@ h1.app-title {
   margin: 0;
   position: relative;
   top: var(--section-padding);
-  z-index: 20;
+  z-index: 40;
   font-family: var(--font-handwriting);
   font-size: 3.5rem;
 }
@@ -53,12 +53,11 @@ h1.app-title {
   right: 0;
   z-index: 30;
   white-space: nowrap;
-  background-color: var(--color-body-bg);
   transform: translateX(calc(-1 * var(--main-margin)));
-  transition: all 0.75s ease-out;
+  transition: all 0.35s ease-in;
 }
 #navigation ul {
-  transition: all 0.25s ease-out;
+  transition: all 0.35s ease-in-out;
 }
 #navigation .link {
   margin-left: calc(1.5 * var(--section-padding));
@@ -83,7 +82,7 @@ h1.app-title {
   background-color: rgba(255, 255, 255, 0);
   line-height: normal;
   text-align: left;
-  transition: all 0.5s ease-out;
+  transition: all 0.35s ease-in;
 }
 #navigation .menu-toggle h3 {
   margin: 0;
@@ -107,6 +106,21 @@ h1.app-title {
   transform: translateX(
     calc(-1 * (100% + var(--section-padding) + var(--main-margin)))
   );
+}
+#nav-backdrop {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 90px;
+  left: 0;
+  z-index: 29;
+  opacity: 0.8;
+  background-color: var(--color-body-bg);
+  transition: all 0.35s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+#nav-backdrop.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 main {
@@ -139,7 +153,7 @@ main {
 
 .main-wrapper.index {
   grid-template-columns: minmax(300px, 400px) fit-content(50vw);
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: min-content 1fr;
 }
 .index-block {
   font-size: 1.2rem;
@@ -199,16 +213,25 @@ main {
   align-items: stretch;
 }
 
+/*******************************
+ * Team and Member Edit Styles *
+ *******************************/
+
+.main-wrapper.details {
+  grid-template-columns: fit-content(40vw) 40vw;
+}
+
 .details-form {
-  grid-area: r;
-  width: 40vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
 }
-.details-form input {
-  margin-bottom: 0.75rem;
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  position: relative;
 }
 
 /********************
@@ -314,6 +337,49 @@ main {
 .member-card .prompt {
   font-size: 0.8rem;
   color: var(--color-text-lowlight);
+}
+
+/*******************************
+ * Member Profile Modal Styles *
+ *******************************/
+
+.member-modal-wrapper {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 90px;
+  left: 0;
+  z-index: 29;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+.member-modal {
+  width: 40vw;
+  height: 40vh;
+  padding: var(--section-padding);
+  background-color: var(--color-body-bg);
+  pointer-events: all;
+}
+
+#member-backdrop {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 90px;
+  left: 0;
+  z-index: 29;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+  background-color: var(--color-body-bg);
+  transition: all 0.35s cubic-bezier(0.46, 0.03, 0.52, 0.96);
+}
+#member-backdrop.hidden {
+  opacity: 0;
+  visibility: hidden;
 }
 
 /*
