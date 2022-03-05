@@ -12,19 +12,9 @@ export default function MemberModal({ member, custPrompt }) {
 
   return (
     <div className='member-modal messy'>
-      {member.avatar && (
-        <div className='avatar'>
-          <Image
-            src={member.avatar}
-            alt={`${screenName}'s avatar`}
-            layout='fill'
-            objectFit='contain'
-          />
-        </div>
-      )}
       <div className='details'>
-        <h4 className='no-break'>{screenName}</h4>
-        {secondaryName && <p className='sec-name'>{secondaryName}</p>}
+        <h4>{screenName}</h4>
+        {secondaryName && <h5 className='sec-name'>{secondaryName}</h5>}
         {member.pronouns && (
           <p>
             <span>pronouns</span>
@@ -55,6 +45,16 @@ export default function MemberModal({ member, custPrompt }) {
           </>
         )}
       </div>
+      {member.avatar && (
+        <div className='avatar'>
+          <Image
+            src={member.avatar}
+            alt={`${screenName}'s avatar`}
+            layout='fill'
+            objectFit='contain'
+          />
+        </div>
+      )}
       {member.custom_answer && (
         <div className='answer'>
           <p className='prompt'>{custPrompt}</p>
