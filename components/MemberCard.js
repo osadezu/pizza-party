@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 export default function MemberCard({ member, custPrompt, setShowMember }) {
   let screenName, secondaryName;
@@ -13,13 +12,9 @@ export default function MemberCard({ member, custPrompt, setShowMember }) {
   }
 
   return (
-    <div
-      className='member-card messy'
-      // onClick={() => setShowMember(member)}
-    >
+    <div className='member-card messy' onClick={() => setShowMember(member)}>
       <div className='details'>
         <h4>{screenName}</h4>
-        {/* {secondaryName && <p className='sec-name'>{secondaryName}</p>} */}
         <p>
           {member.pronouns && member.pronouns}
           {member.pronouns && member.location && ' - '}
