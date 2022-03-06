@@ -13,6 +13,7 @@ export default function Team() {
   const router = useRouter();
   const { user } = useUser({ redirectTo: '/?login' });
   const [team, setTeam] = useState();
+  const [members, setMembers] = useState();
   const [showMember, setShowMember] = useState(false);
 
   useEffect(() => {
@@ -34,7 +35,18 @@ export default function Team() {
         });
         // console.log(response.data);
         if (response.status === 200) {
-          if (isMounted) setTeam(response.data);
+          /* Extract members from Team info and shuffle the array to display in different order 
+          borrowed from this SO: https://stackoverflow.com/a/46545530/1074802 */
+          const newMembers = response.data.members
+            .map((member) => ({ member, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ member }) => member);
+          delete response.data.members;
+          const newTeam = response.data;
+          if (isMounted) {
+            setMembers(newMembers);
+            setTeam(newTeam);
+          }
         }
       } catch (error) {
         console.error(error);
@@ -44,7 +56,8 @@ export default function Team() {
     return () => {
       isMounted = false;
     };
-  }, [user, user?.team]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.team]);
 
   // Catch non-member user
   if (user && user.isMember == false) {
@@ -57,7 +70,7 @@ export default function Team() {
     }
   }
 
-  if (!team || !team.members) {
+  if (!team || !members) {
     // Wait while loading team data
     return null;
   }
@@ -73,7 +86,7 @@ export default function Team() {
           <h3>{team.blurb}</h3>
           <div className='collab'>
             <h4>{team.collab_prompt}</h4>
-            {team.members.map((member, i) => (
+            {members.map((member, i) => (
               <div className='collab-entry sketchy' key={i}>
                 {member.collab_answer}
               </div>
@@ -81,7 +94,7 @@ export default function Team() {
           </div>
         </div>
         <div className='member-side'>
-          {team.members.map((member, i) => {
+          {members.map((member, i) => {
             return (
               <MemberCard
                 key={i}
