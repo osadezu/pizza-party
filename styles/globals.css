@@ -18,11 +18,16 @@
   --body-font: var(--font-sans-serif);
 
   /* Colors */
+  --color-sauce: #c92a2a;
+  --color-theme-1: #bb6464;
+  --color-box-bg: #cdb699;
+  --color-theme-3: #c3dbd9;
+  --color-theme-4: #c8f2ef;
   --color-body-bg: white;
-  --color-button-bg: rgb(239, 239, 239);
+  /* --color-button-bg: rgb(239, 239, 239); */
+  --color-button-bg: var(--color-box-bg);
   --color-button-border: rgb(118, 118, 118);
   --color-text-lowlight: gray;
-  --color-sauce: #c92a2a;
 
   /* Spacing */
   --main-margin: 3rem;
