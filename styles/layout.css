@@ -497,3 +497,19 @@ https://codepen.io/mp/pen/kBEeKw
 .member-card.messy:nth-child(3n) {
   transform: rotate(2.5deg) translateX(var(--section-padding));
 }
+
+.member-modal.messy {
+  animation: amoeba 15s infinite; 
+}
+@keyframes amoeba {
+  /* border-radius: 95% 4% 92% 5%/4% 95% 6% 95%; */
+  15% {
+    border-radius: 10% 10% 80% 5%/5% 70% 6% 50%;
+  }
+  30% {
+    border-radius: 75% 5% 80% 14%/12% 50% 8% 5%;
+  }
+  65% {
+    border-radius: 75% 5% 20% 14%/8% 40% 8% 50%;
+  }
+}
