@@ -425,11 +425,8 @@ main {
   top: var(--section-padding);
   right: var(--main-margin);
   cursor:pointer;
-  transition: transform 0.15s ease-out;
 }
-.member-modal .close-modal:hover {
-  transform: scale(1.2);
-}
+
 #member-backdrop {
   position: absolute;
   right: 0;
@@ -499,7 +496,7 @@ https://codepen.io/mp/pen/kBEeKw
 }
 
 .member-modal.messy {
-  animation: amoeba 15s infinite; 
+  animation: amoeba 20s infinite; 
 }
 @keyframes amoeba {
   /* border-radius: 95% 4% 92% 5%/4% 95% 6% 95%; */

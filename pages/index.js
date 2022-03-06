@@ -68,7 +68,7 @@ export default function Home() {
                   <button
                     type='button'
                     onClick={() => setDoLogin(!doLogin)}
-                    className='button-inline'>
+                    className='button-inline squirmy'>
                     Sign Up
                   </button>
                 </p>
@@ -95,7 +95,7 @@ export default function Home() {
                     <button
                       type='button'
                       onClick={() => setDoLogin(!doLogin)}
-                      className='button-inline'>
+                      className='button-inline squirmy'>
                       Log In
                     </button>
                   </p>

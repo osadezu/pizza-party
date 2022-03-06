@@ -3,13 +3,14 @@ import Image from 'next/image';
 import SvgCloseIcon from '../assets/close-icon.svg'
 
 export default function MemberModal({ member, custPrompt, setShowMember }) {
-  let screenName;
+  let screenName, secondaryName;
 
   if (member.goes_by) {
     screenName = member.goes_by;
-    const secondaryName = member.first_name + ' ' + member.last_name;
+    secondaryName = member.first_name + ' ' + member.last_name;
   } else {
     screenName = member.first_name + ' ' + member.last_name;
+    secondaryName = null;
   }
 
   return (
@@ -65,7 +66,7 @@ export default function MemberModal({ member, custPrompt, setShowMember }) {
           <p>{member.custom_answer}</p>
         </div>
       )}
-      <SvgCloseIcon className='close-modal' onClick={() => setShowMember(false)} />
+      <SvgCloseIcon className='close-modal clickme' onClick={() => setShowMember(false)} />
     </div>
   );
 }

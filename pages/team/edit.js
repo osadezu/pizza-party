@@ -217,11 +217,11 @@ export default function TeamEdit() {
               </>
             )} */}
           {!makingNewTeam && (
-            <button type='button' onClick={handleCopyLink}>
+            <button type='button' className='squirmy' onClick={handleCopyLink}>
               {copied ? 'Copied!' : 'Copy Invite Link'}
             </button>
           )}
-          <button type='submit'>{makingNewTeam ? 'Go Team!' : 'Save'}</button>
+          <button type='submit' className='squirmy'>{makingNewTeam ? 'Go Team!' : 'Save'}</button>
         </form>
       </div>
     </>

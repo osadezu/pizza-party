@@ -124,7 +124,7 @@ export default function Signup({ hasInvite }) {
         minLength='8'
         required
       />
-      <button type='submit' disabled={!passwordMatch}>
+      <button type='submit' className='squirmy' disabled={!passwordMatch}>
         Go Team!
       </button>
     </form>

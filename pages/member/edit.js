@@ -293,9 +293,10 @@ export default function MemberEdit() {
             id='avatar'
             name='avatar'
             accept='image/png, image/jpeg'
+            className='squirmy'
             onChange={handleChange}
           />
-          <button type='submit'>{makingNewMember ? 'Make me!' : 'Save'}</button>
+          <button className='squirmy' type='submit'>{makingNewMember ? 'Make me!' : 'Save'}</button>
         </form>
       </div>
     </>

@@ -90,7 +90,7 @@ export default function Signup() {
         minLength='8'
         required
       />
-      <button type='submit' disabled={!formFilled}>
+      <button type='submit' className='squirmy' disabled={!formFilled}>
         Go Team!
       </button>
     </form>
