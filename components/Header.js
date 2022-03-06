@@ -7,25 +7,20 @@ export default function Header() {
   const router = useRouter();
   const { user, mutateUser } = useUser();
 
-  // console.log('Header user:', user);
-
   const loggedIn = user?.isLoggedIn;
 
   return (
     <div id='header-wrapper'>
       <div className='header-titles'>
         <h1 className='app-title'>PizzaParty 🍕</h1>
-        {/* {loggedIn && (
-          <h2>
-            Your Team Name
-          </h2>
-        )} */}
       </div>
       <div className='header-controls'>
         {loggedIn && (
           <>
             <p>Logged in as {user?.email}</p>
             <button
+              type='button'
+              className='squirmy'
               onClick={async (e) => {
                 e.preventDefault();
                 mutateUser(

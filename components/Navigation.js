@@ -10,9 +10,7 @@ import SvgMenuIcon from '../assets/menu-icon.svg';
 export default function Navigation() {
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
-  const { user, mutateUser } = useUser();
-
-  // console.log('Nav logging pathame:', router.pathname);
+  const { user } = useUser();
 
   if (!user?.isLoggedIn) {
     return null;
@@ -24,7 +22,7 @@ export default function Navigation() {
         <div className='nav-buttons'>
           <button
             type='button'
-            className='menu-toggle'
+            className='menu-toggle boxless'
             onClick={() => setShowMenu(!showMenu)}>
             Menu
           </button>

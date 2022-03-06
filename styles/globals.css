@@ -19,6 +19,8 @@
 
   /* Colors */
   --color-body-bg: white;
+  --color-button-bg: rgb(239, 239, 239);
+  --color-button-border: rgb(118, 118, 118);
   --color-text-lowlight: gray;
   --color-sauce: #c92a2a;
 
@@ -73,18 +75,27 @@ ul {
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0.15rem;
+  text-underline-offset: 0.15rem;
   cursor: pointer;
   transition: 0.35s ease-out;
 }
 a:hover {
-  /* text-shadow: 0 0.4em 0.8em tomato; */
-  text-decoration: var(--color-sauce) wavy underline;
-  text-underline-offset: 0.15rem;
+  text-decoration-color: var(--color-sauce);
 }
 a.active {
-  text-decoration: var(--color-sauce) wavy underline;
-  text-underline-offset: 0.15rem;
+  color: var(--color-sauce);
+  text-decoration: none;
+}
+a.active:hover {
+  text-decoration: none;
+}
+a.active::after {
+  content: '👈';
+  margin-left: var(--inline-spacing);
 }
 
 form label {
@@ -105,11 +116,13 @@ p > button {
   margin: 0 var(--inline-spacing);
 }
 
-input,
+input:not([type='file']),
 textarea {
   padding-left: var(--inline-spacing);
   padding-right: var(--inline-spacing);
   border-radius: 50px 15px 15px 15px / 10px 75px 25px 45px;
+  border-color: var(--color-button-border);
+  border-style: solid;
   line-height: 1.5;
 }
 input[type='file'] {
@@ -123,8 +136,11 @@ input[type='file'] {
 button,
 input[type='file']::file-selector-button {
   border-radius: 50px 15px 15px 15px / 10px 75px 45px 25px;
+  border-color: var(--color-button-border);
+  border-style: solid;
   font-size: inherit;
   line-height: 1.5;
+  background-color: var(--color-button-bg);
 }
 button:not(:disabled),
 input[type='file']::file-selector-button {
@@ -143,9 +159,18 @@ input.squirmy[type='file']::file-selector-button:hover {
   box-shadow: 0.2rem 0.8rem 0.4rem -0.6rem hsla(0, 0%, 0%, 0.3);
 }
 
+button.boxless {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  line-height: normal;
+}
+
 .clickme {
   transition: transform 0.15s ease-out;
 }
 .clickme:hover {
   transform: scale(1.2);
+  font-weight: bold;
 }
