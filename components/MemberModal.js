@@ -1,6 +1,8 @@
 import Image from 'next/image';
 
-export default function MemberModal({ member, custPrompt }) {
+import SvgCloseIcon from '../assets/close-icon.svg'
+
+export default function MemberModal({ member, custPrompt, setShowMember }) {
   let screenName;
 
   if (member.goes_by) {
@@ -14,36 +16,38 @@ export default function MemberModal({ member, custPrompt }) {
     <div className='member-modal messy'>
       <div className='details'>
         <h4>{screenName}</h4>
-        {secondaryName && <h5 className='sec-name'>{secondaryName}</h5>}
-        {member.pronouns && (
-          <p>
-            <span>pronouns</span>
-            {member.pronouns}
-          </p>
-        )}
-        {member.location && (
-          <p>
-            <span>location</span> {member.location}
-          </p>
-        )}
-        {member.interests && (
-          <p>
-            <span>interests</span>
-            {member.interests}
-          </p>
-        )}
-        {member.pets && (
-          <p>
-            <span>pets</span>
-            {member.pets}
-          </p>
-        )}
-        {member.link && (
-          <>
-            <span>🔗</span>
-            <a href={'//' + member.link}>{member.link}</a>
-          </>
-        )}
+        {secondaryName && <h5>{secondaryName}</h5>}
+        <div className='details-table'>
+          {member.pronouns && (
+            <>
+              <p className='details-label'>pronouns</p>
+              <p>{member.pronouns}</p>
+            </>
+          )}
+          {member.location && (
+            <>
+              <p className='details-label'>location</p> <p>{member.location}</p>
+            </>
+          )}
+          {member.interests && (
+            <>
+              <p className='details-label'>interests</p>
+              <p>{member.interests}</p>
+            </>
+          )}
+          {member.pets && (
+            <>
+              <p className='details-label'>pets</p>
+              <p>{member.pets}</p>
+            </>
+          )}
+          {member.link && (
+            <>
+              <p className='details-label'>🔗</p>
+              <a href={'//' + member.link}>{member.link}</a>
+            </>
+          )}
+        </div>
       </div>
       {member.avatar && (
         <div className='avatar'>
@@ -61,6 +65,7 @@ export default function MemberModal({ member, custPrompt }) {
           <p>{member.custom_answer}</p>
         </div>
       )}
+      <SvgCloseIcon className='close-modal' onClick={() => setShowMember(false)} />
     </div>
   );
 }

@@ -310,6 +310,7 @@ main {
     'answer avatar';
   justify-content: space-between;
   font-size: smaller;
+  cursor:pointer;
 }
 .member-card h4 {
   margin: 0;
@@ -361,12 +362,12 @@ main {
 }
 .member-modal {
   width: 40vw;
-  height: 40vh;
   box-sizing: content-box;
   padding: var(--main-margin);
+  position: relative;
   display: grid;
   grid-template-columns: 1fr min-content;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto;
   grid-template-areas:
     'details avatar'
     'answer answer';
@@ -377,15 +378,8 @@ main {
 }
 .member-modal .details {
   grid-area: details;
-  display: table;
-  /* display:grid;
-  grid-template-columns: min-content auto;
-  grid-template-rows: auto auto auto; */
-  margin-bottom: var(--inline-spacing);
 }
 .member-modal h4 {
-  margin: 0;
-  margin-bottom: var(--section-padding);
   font-size: 2rem;
   font-family: var(--font-handwriting);
   white-space: nowrap;
@@ -393,15 +387,18 @@ main {
 .member-modal h5 {
   font-size: 1.25rem;
 }
+.member-modal .details-table {
+  display: grid;
+  gap: var(--inline-spacing);
+  grid-template-columns: min-content auto;
+}
 .member-modal .details p {
-  display: table-row;
   white-space: nowrap;
 }
-.member-modal span {
+.member-modal .details-label {
   width: min-content;
-  display: table-cell;
+  place-self: center flex-end;
   text-align: right;
-  padding-right: var(--inline-spacing);
   font-size: smaller;
   color: var(--color-text-lowlight);
 }
@@ -412,14 +409,27 @@ main {
   position: relative;
 }
 .member-modal .answer {
-  padding-left: var(--section-gap);
+  padding-top: var(--section-padding);
   grid-area: answer;
   align-self: flex-end;
 }
 .member-modal .prompt {
+  margin-bottom: var(--inline-spacing);
+  font-size: smaller;
   color: var(--color-text-lowlight);
 }
-
+.member-modal .close-modal {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: var(--section-padding);
+  right: var(--main-margin);
+  cursor:pointer;
+  transition: transform 0.15s ease-out;
+}
+.member-modal .close-modal:hover {
+  transform: scale(1.2);
+}
 #member-backdrop {
   position: absolute;
   right: 0;
@@ -456,12 +466,12 @@ https://codepen.io/mp/pen/kBEeKw
    */
   /* -webkit-background-clip: content-box;
   background-clip: content-box; */
+  transition: all .15s ease-out;
 }
 
 .messy {
   border: solid black;
   border-color: black;
-  position: relative;
   /* Fix jagged edges in Chrome */
   backface-visibility: hidden;
   /* Check if below is needed when testing other browsers
@@ -469,11 +479,14 @@ https://codepen.io/mp/pen/kBEeKw
    */
   /* -webkit-background-clip: content-box;
   background-clip: content-box; */
-}
-.messy {
   border-width: 3px 4px 3px 5px;
   border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+  transition: all .15s ease-out;
 }
+.messy:hover {
+  box-shadow: 0.2rem 0.8rem 0.4rem -0.6rem hsla(0, 0%, 0%, 0.3);
+}
+
 .member-card.messy:nth-child(odd) {
   transform: rotate(2deg) translateX(var(--section-padding));
 }
@@ -483,7 +496,4 @@ https://codepen.io/mp/pen/kBEeKw
 }
 .member-card.messy:nth-child(3n) {
   transform: rotate(2.5deg) translateX(var(--section-padding));
-}
-.messy:hover {
-  box-shadow: 0.2rem 0.8rem 0.4rem -0.6rem hsla(0, 0%, 0%, 0.3);
 }
