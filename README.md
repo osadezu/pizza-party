@@ -13,7 +13,7 @@ A fast and easy way for new remote teams to break the zoom ice. Through a shared
 - [Next.js](https://nextjs.org/) ([React](https://reactjs.org/)) app deployed on [Vercel](https://vercel.com/)
 - [Django](https://www.djangoproject.com/)-based [REST API](https://www.django-rest-framework.org/) with [PostgreSQL](https://www.postgresql.org/) deployed on [Heroku](https://www.heroku.com)
 - Authentication session data stored in encrypted cookies using [iron-session](https://github.com/vvo/iron-session)
-- [AWS S3]([url](https://aws.amazon.com/s3/) user image storage.
+- [AWS S3](https://aws.amazon.com/s3/) user image storage.
 - Other: [Djoser](https://github.com/sunscrapers/djoser), [Axios](https://axios-http.com/), [swr](https://swr.vercel.app/)
 - Parts of the styling were borrowed / informed by:
   - https://bootswatch.com/sketchy/
