@@ -45,6 +45,17 @@ h1.app-title {
   pointer-events: none;
 }
 
+#footer-wrapper {
+  width: 100%;
+  padding: var(--section-padding) var(--main-margin);
+  position: relative;
+  display: flex;
+  gap: var(--section-padding);
+  justify-content: center;
+  align-items: baseline;
+  background-color: var(--color-body-bg);
+}
+
 #navigation {
   width: min-content;
   padding: var(--section-padding);
