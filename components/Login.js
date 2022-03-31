@@ -5,7 +5,7 @@ import useUser from '../lib/useUser';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function Login({ doDemo }) {
+export default function Login({ doDemo, setDoDemo }) {
   const { mutateUser } = useUser({
     redirectTo: '/team',
     redirectIfFound: true,
@@ -31,6 +31,7 @@ export default function Login({ doDemo }) {
     const newFormFields = { ...formFields, [e.target.id]: e.target.value };
     setFormFields(newFormFields);
     setFormFilled(newFormFields.email.length && newFormFields.password.length);
+    setDoDemo(false); // Reset demo state if form is edited manually
   }
 
   async function handleLogin(body) {

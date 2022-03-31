@@ -109,7 +109,7 @@ export default function Home() {
             )}
           </div>
           {doLogin ? (
-            <Login doDemo={doDemo} />
+            <Login doDemo={doDemo} setDoDemo={setDoDemo} />
           ) : (
             <Signup hasInvite={hasInvite?.invite} />
           )}
