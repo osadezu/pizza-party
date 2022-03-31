@@ -67,6 +67,8 @@ export default function Login({ doDemo, setDoDemo }) {
         handleLogin({
           email: formFields.email,
           auth_token: res.data.auth_token,
+          // Temp session property to disable editing in demo mode
+          isDemo: doDemo,
         });
       }
     } catch (err) {

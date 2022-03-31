@@ -220,6 +220,10 @@ main {
   justify-content: center;
   align-items: stretch;
 }
+.with-invite span {
+  color: var(--color-sauce);
+  font-size: larger;
+}
 
 /*******************************
  * Team and Member Edit Styles *

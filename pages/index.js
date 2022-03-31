@@ -80,12 +80,15 @@ export default function Home() {
               </>
             ) : (
               <>
-                <p>
+                <p className='with-invite'>
                   {hasInvite ? (
                     <>
                       {'You were invited to join '}
                       {hasInvite.teamName ? (
-                        <span>{hasInvite.teamName + '!'}</span>
+                        <>
+                          <span>{hasInvite.teamName}</span>
+                          {'!'}
+                        </>
                       ) : (
                         'a team!'
                       )}
