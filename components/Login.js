@@ -22,7 +22,7 @@ export default function Login({ doDemo, setDoDemo }) {
   // TODO: improve demo login to function without hardcoded credentials
   useEffect(() => {
     if (doDemo) {
-      setFormFields({ email: 'oscar@team.com', password: '1234poiu' });
+      setFormFields({ email: 'demo@osadezu.com', password: '1234poiu' });
       setFormFilled(true);
     }
   }, [doDemo]);
