@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Image from 'next/image';
 
 import Signup from '../components/Signup.js';
 import Login from '../components/Login.js';
@@ -12,6 +11,7 @@ import SvgYay from '../assets/team-yay.svg';
 export default function Home() {
   const router = useRouter();
   const [doLogin, setDoLogin] = useState(false);
+  const [doDemo, setDoDemo] = useState(false);
   const [hasInvite, setHasInvite] = useState(null);
 
   useEffect(() => {
@@ -32,6 +32,11 @@ export default function Home() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.isReady, router.query?.login]);
+
+  function handleDemo() {
+    setDoLogin(true);
+    setDoDemo(true);
+  }
 
   return (
     <>
@@ -103,7 +108,18 @@ export default function Home() {
               </>
             )}
           </div>
-          {doLogin ? <Login /> : <Signup hasInvite={hasInvite?.invite} />}
+          {doLogin ? (
+            <Login doDemo={doDemo} />
+          ) : (
+            <Signup hasInvite={hasInvite?.invite} />
+          )}
+          <div>
+            Just looking? Click{' '}
+            <button type='button' className='squirmy' onClick={handleDemo}>
+              Demo
+            </button>{' '}
+            to see a sample team.
+          </div>
         </div>
       </div>
     </>

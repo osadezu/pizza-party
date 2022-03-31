@@ -1,12 +1,11 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import useUser from '../lib/useUser';
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-export default function Signup() {
+export default function Login({ doDemo }) {
   const { mutateUser } = useUser({
     redirectTo: '/team',
     redirectIfFound: true,
@@ -18,6 +17,15 @@ export default function Signup() {
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
   const [formFilled, setFormFilled] = useState(false);
+
+  // This implementation of the Demo login is not secure!
+  // TODO: improve demo login to function without hardcoded credentials
+  useEffect(() => {
+    if (doDemo) {
+      setFormFields({ email: 'oscar@team.com', password: '1234poiu' });
+      setFormFilled(true);
+    }
+  }, [doDemo]);
 
   function handleChange(e) {
     const newFormFields = { ...formFields, [e.target.id]: e.target.value };

@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import useUser from '../lib/useUser';
 
 import SvgPizzaIcon from '../assets/pizza-icon.svg';
-import SvgMenuIcon from '../assets/menu-icon.svg';
 
 export default function Navigation() {
   const [showMenu, setShowMenu] = useState(false);
