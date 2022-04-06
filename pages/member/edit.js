@@ -107,6 +107,13 @@ export default function MemberEdit() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (user.isDemo) {
+      // Demo: redirect without saving
+      router.push('/team');
+      return null;
+    }
+
     const data = new FormData(e.target);
 
     try {
@@ -296,7 +303,11 @@ export default function MemberEdit() {
             className='squirmy'
             onChange={handleChange}
           />
-          <button className='squirmy' type='submit'>{makingNewMember ? 'Make me!' : 'Save'}</button>
+          <button
+            type='submit'
+            className={user.isDemo ? 'squirmy demo-disable' : 'squirmy'}>
+            {makingNewMember ? 'Make me!' : 'Save'}
+          </button>
         </form>
       </div>
     </>
