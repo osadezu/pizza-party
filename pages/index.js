@@ -55,11 +55,13 @@ export default function Home() {
         <div className='index-block'>
           <h3>What our cats are saying:</h3>
           <blockquote>
-            <p>Finally a page that puts the I in Team!</p>
+            <p>Finally an app that puts the I in Team!</p>
             <figcaption>Mittens from H.R.</figcaption>
           </blockquote>
           <blockquote>
-            <p>PizzaParty really gets the human into the screen name.</p>
+            <p>
+              PizzaParty got the human into the screen name once and for all.
+            </p>
             <figcaption>Dr. Fluff</figcaption>
           </blockquote>
         </div>
