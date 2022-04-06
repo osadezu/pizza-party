@@ -70,7 +70,7 @@ export default function Navigation() {
               <a
                 className={router.pathname == '/member/edit' ? 'active' : ''}
                 onClick={() => setShowMenu(false)}>
-                Profile
+                Edit Profile
               </a>
             </Link>
           </li>
