@@ -87,6 +87,13 @@ export default function TeamEdit() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (user.isDemo) {
+      // Demo: redirect without saving
+      router.push('/team');
+      return null;
+    }
+
     const data = new FormData(e.target);
 
     try {
@@ -123,13 +130,22 @@ export default function TeamEdit() {
       // TODO: THIS INVITE LINK IMPLEMENTATION IS NOT SECURE!
       // Link must contain a randomized key and the validity must be verified in the backend.
       // bake link generation inton Django model and add "safety" string.
-      navigator.clipboard
-        .writeText(
-          `${window.location.origin}/?signUp&invite=${
-            formFields.id
-          }&teamName=${encodeURIComponent(formFields.name)}`
-        )
-        .then(() => setCopied(true));
+      if (!user.isDemo) {
+        navigator.clipboard
+          .writeText(
+            `${window.location.origin}/?signUp&invite=${
+              formFields.id
+            }&teamName=${encodeURIComponent(formFields.name)}`
+          )
+          .then(() => setCopied(true));
+      } else {
+        // Copy for demo
+        navigator.clipboard
+          .writeText(
+            `This would typically give you an invite link, but this is just a demo!`
+          )
+          .then(() => setCopied(true));
+      }
     }
   }
 
@@ -216,12 +232,29 @@ export default function TeamEdit() {
                 />
               </>
             )} */}
+
           {!makingNewTeam && (
-            <button type='button' className='squirmy' onClick={handleCopyLink}>
-              {copied ? 'Copied!' : 'Copy Invite Link'}
+            // Normal button
+            <button
+              type='button'
+              className={user.isDemo ? 'squirmy demo-disable' : 'squirmy'}
+              onClick={handleCopyLink}>
+              {!user.isDemo
+                ? // Normal behavior
+                  copied
+                  ? 'Copied!'
+                  : 'Copy Invite Link'
+                : // Demo button
+                copied
+                ? 'This is just a demo team!'
+                : 'Copy Invite Link'}
             </button>
           )}
-          <button type='submit' className='squirmy'>{makingNewTeam ? 'Go Team!' : 'Save'}</button>
+          <button
+            type='submit'
+            className={user.isDemo ? 'squirmy demo-disable' : 'squirmy'}>
+            {makingNewTeam ? 'Go Team!' : 'Save'}
+          </button>
         </form>
       </div>
     </>

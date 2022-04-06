@@ -172,6 +172,10 @@ button.boxless {
   line-height: normal;
 }
 
+button.demo-disable {
+  cursor: not-allowed;
+}
+
 .clickme {
   transition: transform 0.15s ease-out;
 }
