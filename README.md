@@ -4,7 +4,7 @@ A fast and easy way for new remote teams to break the zoom ice. Through a shared
 
 ## See it Live 
 
-🚧 https://pizza-party.osadezu.com/ 🚧 (actively under development)
+https://pizza-party.osadezu.com/ 🚧 (actively under development)
 
 <!-- [![Vercel](https://img.shields.io/github/deployments/osadezu/pizza-party/production?label=vercel&logo=vercel&style=plastic)](https://pizza-party-teams.vercel.app/) -->
 
